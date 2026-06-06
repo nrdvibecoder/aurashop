@@ -13,10 +13,10 @@ $toggleLang = ($currentLang === 'en') ? 'fr' : 'en';
 $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
 ?>
 <!DOCTYPE html>
-<html class="dark" lang="<?php echo $currentLang; ?>">
+<html class="dark overflow-x-hidden" lang="<?php echo $currentLang; ?>">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AURA | <?php echo isset($pageTitle) ? sanitize($pageTitle) : 'Architectural Elegance'; ?></title>
     
     <!-- Tailwind CSS with Forms and Container Queries -->
@@ -139,31 +139,42 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
         }
     </script>
 </head>
-<body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col">
+<body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col overflow-x-hidden">
     <!-- Top Navigation Bar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 h-20 transition-all duration-300">
         <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto relative">
             
-            <!-- Left: Categories Dropdown & Shop Link -->
+            <!-- Left: Burger Menu (Mobile Only) & Desktop Links -->
             <div class="flex items-center gap-6">
-                <!-- Dropdown Trigger Container -->
-                <div class="relative group">
-                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest py-2">
-                        <span><?php echo __('categories'); ?></span>
-                        <span class="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
-                    </button>
-                    <!-- Dropdown Content -->
-                    <div class="absolute left-0 mt-1 w-56 bg-surface-container border border-outline-variant/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-                        <a href="shop.php?category=Women" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('women'); ?></a>
-                        <a href="shop.php?category=Men" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('men'); ?></a>
-                        <a href="shop.php?category=Accessories" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('accessories'); ?></a>
-                        <a href="shop.php?category=Unisex" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('unisex'); ?></a>
-                        <div class="border-t border-outline-variant/10 my-2"></div>
-                        <a href="shop.php" class="block px-6 py-3 text-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors font-medium"><?php echo __('all'); ?></a>
+                <!-- Mobile Burger Button (only visible on mobile/tablet < md) -->
+                <button id="mobile-menu-trigger" class="md:hidden flex items-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+
+                <!-- Desktop navigation options (hidden on mobile < md) -->
+                <div class="hidden md:flex items-center gap-6">
+                    <!-- Dropdown Trigger Container -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest py-2">
+                            <span><?php echo __('categories'); ?></span>
+                            <span class="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <!-- Dropdown Content -->
+                        <div class="absolute left-0 mt-1 w-56 bg-surface-container border border-outline-variant/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+                            <a href="shop.php?category=Women" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('women'); ?></a>
+                            <a href="shop.php?category=Men" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('men'); ?></a>
+                            <a href="shop.php?category=Accessories" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('accessories'); ?></a>
+                            <a href="shop.php?category=Unisex" class="block px-6 py-3 text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"><?php echo __('unisex'); ?></a>
+                            <div class="border-t border-outline-variant/10 my-2"></div>
+                            <a href="shop.php" class="block px-6 py-3 text-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors font-medium"><?php echo __('all'); ?></a>
+                        </div>
                     </div>
+                    <!-- Main Shop Link -->
+                    <a href="shop.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('shop'); ?></a>
+                    <!-- About & Contact links -->
+                    <a href="about.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('about'); ?></a>
+                    <a href="contact.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('contact'); ?></a>
                 </div>
-                <!-- Main Shop Link -->
-                <a href="shop.php" class="hidden sm:inline text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('shop'); ?></a>
             </div>
 
             <!-- Center: Logo -->
@@ -172,7 +183,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
             </div>
 
             <!-- Right: Actions -->
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4 md:gap-6">
                 <!-- Search bar -->
                 <form action="shop.php" method="GET" class="hidden md:flex items-center relative">
                     <input type="text" name="q" placeholder="<?php echo __('search'); ?>..." class="bg-surface-container border border-outline-variant/20 rounded-full py-1.5 pl-4 pr-10 text-label-sm text-on-surface placeholder:text-outline/40 w-44 focus:w-60 transition-all duration-300">
@@ -193,9 +204,9 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                     </span>
                 </a>
 
-                <!-- Gear Account / Admin Icon -->
+                <!-- User Account / Admin Icon -->
                 <?php if ($auth): ?>
-                    <div class="relative group">
+                    <div class="relative group hidden md:block">
                         <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors py-2">
                             <span class="material-symbols-outlined text-2xl">account_circle</span>
                         </button>
@@ -209,10 +220,96 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                             <a href="logout.php" class="block px-6 py-3 text-body-md text-error hover:bg-surface-container-high transition-colors"><?php echo __('logout'); ?></a>
                         </div>
                     </div>
+                    <!-- Mobile Account shortcut directly to settings -->
+                    <a href="settings.php" class="md:hidden material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">account_circle</a>
                 <?php else: ?>
                     <a href="login.php" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="<?php echo __('login'); ?>">account_circle</a>
                 <?php endif; ?>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+        <div id="mobile-drawer-content" class="w-80 h-full bg-surface-container-lowest border-r border-outline-variant/10 flex flex-col justify-between p-8 -translate-x-full transition-transform duration-300 ease-out">
+            <div>
+                <!-- Header of Drawer -->
+                <div class="flex justify-between items-center mb-8">
+                    <span class="font-headline-lg text-headline-lg tracking-widest text-primary">AURA</span>
+                    <button id="mobile-drawer-close" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors focus:outline-none">close</button>
+                </div>
+
+                <!-- Navigation List -->
+                <nav class="space-y-6">
+                    <!-- Boutique Section -->
+                    <div class="space-y-2">
+                        <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1"><?php echo __('shop'); ?></span>
+                        <a href="shop.php?category=Women" class="block font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors py-1 pl-2 border-l border-primary/20"><?php echo __('women'); ?></a>
+                        <a href="shop.php?category=Men" class="block font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors py-1 pl-2 border-l border-primary/20"><?php echo __('men'); ?></a>
+                        <a href="shop.php?category=Accessories" class="block font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors py-1 pl-2 border-l border-primary/20"><?php echo __('accessories'); ?></a>
+                        <a href="shop.php?category=Unisex" class="block font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors py-1 pl-2 border-l border-primary/20"><?php echo __('unisex'); ?></a>
+                        <a href="shop.php" class="block font-body-md text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/20"><?php echo __('all'); ?></a>
+                    </div>
+
+                    <!-- Compte Section -->
+                    <div class="space-y-2 pt-4">
+                        <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1"><?php echo __('account'); ?></span>
+                        <?php if ($auth): ?>
+                            <a href="settings.php" class="block font-body-md text-on-surface hover:text-primary transition-colors"><?php echo __('profile'); ?></a>
+                            <a href="settings.php?tab=orders" class="block font-body-md text-on-surface hover:text-primary transition-colors"><?php echo __('order_tracking'); ?></a>
+                            <?php if ($auth['role'] === 'admin'): ?>
+                                <a href="admin.php" class="block font-body-md text-primary hover:underline transition-colors"><?php echo __('admin_dashboard'); ?></a>
+                            <?php endif; ?>
+                            <a href="logout.php" class="block font-body-md text-error hover:text-error/80 transition-colors"><?php echo __('logout'); ?></a>
+                        <?php else: ?>
+                            <a href="login.php" class="block font-body-md text-on-surface hover:text-primary transition-colors"><?php echo __('login'); ?> / <?php echo __('register'); ?></a>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Infos Section -->
+                    <div class="space-y-2 pt-4">
+                        <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1">Information</span>
+                        <a href="about.php" class="block font-body-md text-on-surface-variant hover:text-primary transition-colors"><?php echo __('about'); ?></a>
+                        <a href="contact.php" class="block font-body-md text-on-surface-variant hover:text-primary transition-colors"><?php echo __('contact'); ?></a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Footer of Drawer -->
+            <div class="border-t border-outline-variant/10 pt-6">
+                <p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest opacity-60">© 2026 AURA Algérie</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drawer toggling script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.getElementById('mobile-menu-trigger');
+            const drawer = document.getElementById('mobile-drawer');
+            const drawerContent = document.getElementById('mobile-drawer-content');
+            const closeBtn = document.getElementById('mobile-drawer-close');
+
+            function openDrawer() {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                drawer.classList.add('opacity-100');
+                drawerContent.classList.remove('-translate-x-full');
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('opacity-100');
+                drawer.classList.add('opacity-0', 'pointer-events-none');
+                drawerContent.classList.add('-translate-x-full');
+            }
+
+            if (trigger) trigger.addEventListener('click', openDrawer);
+            if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if (drawer) {
+                drawer.addEventListener('click', (e) => {
+                    if (e.target === drawer) closeDrawer();
+                });
+            }
+        });
+    </script>
+
     <main class="flex-grow pt-24 pb-12 page-fade-in">

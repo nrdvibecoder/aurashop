@@ -31,13 +31,13 @@ $categories = [
 ?>
 
 <!-- ============ HERO CAROUSEL ============ -->
-<section class="relative h-screen w-full overflow-hidden -mt-24" id="hero">
+<section class="relative h-[70vh] max-h-[650px] w-full overflow-hidden -mt-24" id="hero">
     <div class="carousel-inner w-full h-full relative">
         <?php foreach ($heroSlides as $idx => $slide): ?>
         <div class="carousel-slide absolute inset-0 transition-all duration-1000 <?php echo $idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'; ?>">
             <img src="<?php echo $slide['img']; ?>" 
                  alt="AURA Hero" 
-                 class="w-full h-full object-cover brightness-[0.55] scale-105 transition-transform duration-10000">
+                 class="w-full h-full object-cover object-top brightness-[0.55] scale-105 transition-transform duration-10000">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/20 to-surface/60"></div>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-margin-mobile z-10">
                 <p class="font-label-sm text-label-sm tracking-[0.4em] uppercase text-primary mb-6 opacity-0 transition-all duration-700 delay-200" 

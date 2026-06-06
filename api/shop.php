@@ -1,28 +1,5 @@
 <?php
 require_once 'config.php';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// SAFETY FALLBACKS: Ensures functions exist even if config.php misses them
-// ═══════════════════════════════════════════════════════════════════════════
-if (!function_exists('__')) {
-    function __($text) {
-        return ucfirst(str_replace('_', ' ', $text)); // Returns 'shop' as 'Shop'
-    }
-}
-if (!function_exists('sanitize')) {
-    function sanitize($data) {
-        return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
-    }
-}
-if (!function_exists('format_price')) {
-    function format_price($price) {
-        return number_format($price, 0, '.', ' ') . ' DA'; // Formats 12000 to "12 000 DA"
-    }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PAGE LOGIC
-// ═══════════════════════════════════════════════════════════════════════════
 $pageTitle = __('shop') . ' – AURA';
 
 $category = sanitize($_GET['category'] ?? '');
@@ -45,7 +22,7 @@ $categoryImages = [
 $products = [];
 $error = null;
 
-if (isset($pdo) && $pdo) {
+if ($pdo) {
     try {
         $conditions = ['p.price >= ?', 'p.price <= ?'];
         $params = [$minPrice, $maxPrice];
@@ -93,6 +70,7 @@ if (isset($pdo) && $pdo) {
 $hasBanner = $category && isset($categoryImages[$category]);
 ?>
 
+<!-- Category Banner -->
 <?php if ($hasBanner): ?>
 <div class="relative h-64 md:h-80 overflow-hidden -mt-0 mb-0">
     <img src="<?php echo $categoryImages[$category]; ?>" alt="<?php echo sanitize($category); ?>" class="w-full h-full object-cover brightness-50">
@@ -120,6 +98,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
 
     <div class="flex flex-col lg:flex-row gap-10">
         
+        <!-- ═══════════ SIDEBAR FILTERS ═══════════ -->
         <aside class="w-full lg:w-64 flex-shrink-0">
             <form action="shop.php" method="GET" id="filter-form">
                 <?php if ($category): ?>
@@ -130,6 +109,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                 <?php endif; ?>
                 
                 <div class="bg-surface-container rounded-xl p-6 space-y-8">
+                    <!-- Sort -->
                     <div>
                         <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-4"><?php echo __('sort'); ?></h3>
                         <div class="space-y-2">
@@ -142,6 +122,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                         </div>
                     </div>
 
+                    <!-- Sizes -->
                     <div>
                         <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-4"><?php echo __('size'); ?></h3>
                         <div class="flex flex-wrap gap-2">
@@ -156,6 +137,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                         </div>
                     </div>
 
+                    <!-- Price Range -->
                     <div>
                         <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-4">Prix (DA)</h3>
                         <div class="flex gap-3 items-center">
@@ -167,6 +149,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                         </div>
                     </div>
 
+                    <!-- Buttons -->
                     <div class="flex gap-3">
                         <button type="submit" class="flex-1 bg-primary text-on-primary font-label-sm text-label-sm uppercase py-3 rounded-lg hover:bg-primary-fixed transition-colors tracking-wider">
                             Filtrer
@@ -180,6 +163,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
             </form>
         </aside>
 
+        <!-- ═══════════ PRODUCT GRID ═══════════ -->
         <main class="flex-1">
             <?php if (empty($products) && !$error): ?>
             <div class="flex flex-col items-center justify-center py-24 text-center">

@@ -100,7 +100,13 @@ $translations = [
         'phone' => 'Numéro de téléphone',
         'notes' => 'Notes de commande',
         'new_arrival' => 'Nouvelle Arrivée',
-        'is_featured' => 'Mettre en Vedette'
+        'is_featured' => 'Mettre en Vedette',
+        'about' => 'À Propos',
+        'contact' => 'Contact',
+        'menu' => 'Menu',
+        'account' => 'Compte',
+        'profile' => 'Mon Profil',
+        'order_tracking' => 'Suivi de Commande'
     ],
     'en' => [
         'home' => 'Home',
@@ -202,6 +208,12 @@ $translations = [
         'phone' => 'Phone Number',
         'notes' => 'Order Notes',
         'new_arrival' => 'New Arrival',
-        'is_featured' => 'Is Featured'
+        'is_featured' => 'Is Featured',
+        'about' => 'About Us',
+        'contact' => 'Contact Us',
+        'menu' => 'Menu',
+        'account' => 'Account',
+        'profile' => 'My Profile',
+        'order_tracking' => 'Order Tracking'
     ]
 ];

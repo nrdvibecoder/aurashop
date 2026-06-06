@@ -50,8 +50,8 @@ unset($_SESSION['newsletter_msg']);
                     Aura <span class="w-8 h-[1px] bg-primary/40"></span>
                 </h4>
                 <ul class="space-y-4">
-                    <li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#"><?php echo __('explore'); ?></a></li>
-                    <li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#"><?php echo __('discover_pieces'); ?></a></li>
+                    <li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="about.php"><?php echo __('about'); ?></a></li>
+                    <li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="contact.php"><?php echo __('contact'); ?></a></li>
                     <li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="settings.php"><?php echo __('my_account'); ?></a></li>
                 </ul>
             </div>
