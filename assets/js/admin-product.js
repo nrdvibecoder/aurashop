@@ -15,12 +15,12 @@ function addColorBlock() {
         <button type="button" onclick="removeColorBlock(this)" class="absolute top-4 right-4 text-error hover:text-on-error-container transition-colors material-symbols-outlined text-xl">close</button>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Nom de couleur / Color Name</label>
+                <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Nom de la couleur</label>
                 <input type="text" name="color_name_${idx}" placeholder="ex: Sage Green" 
                     class="w-full bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 text-on-surface font-body-md focus:border-primary focus:ring-0 focus:outline-none" required>
             </div>
             <div>
-                <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Couleur Hex / Hex Color</label>
+                <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Code Hex de la couleur</label>
                 <div class="flex items-center gap-3">
                     <input type="color" name="color_hex_${idx}" value="#b2cdbc" 
                         class="w-12 h-12 rounded-lg border border-outline-variant/20 bg-transparent cursor-pointer">
@@ -30,7 +30,7 @@ function addColorBlock() {
             </div>
         </div>
         <div>
-            <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Images pour cette couleur / Images for this color</label>
+            <label class="font-label-sm text-label-sm uppercase text-on-surface-variant block mb-2">Images pour cette couleur</label>
             <div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-6 text-center hover:border-primary transition-colors cursor-pointer" 
                 onclick="document.getElementById('color-image-input-${idx}').click()">
                 <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2 block">add_photo_alternate</span>

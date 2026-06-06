@@ -33,12 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
                 $stmt = $pdo->prepare("INSERT INTO newsletter (email) VALUES (?) ON CONFLICT (email) DO NOTHING");
                 $stmt->execute([$email]);
             }
-            $_SESSION['newsletter_msg'] = "Merci pour votre inscription ! / Thank you for subscribing!";
+            $langCookie = $_COOKIE['lang'] ?? 'fr';
+            $_SESSION['newsletter_msg'] = ($langCookie === 'en') ? "Thank you for subscribing!" : "Merci pour votre inscription !";
         } catch (PDOException $e) {
             $_SESSION['newsletter_msg'] = "Erreur: " . $e->getMessage();
         }
     } else {
-        $_SESSION['newsletter_msg'] = "Adresse email invalide. / Invalid email address.";
+        $langCookie = $_COOKIE['lang'] ?? 'fr';
+        $_SESSION['newsletter_msg'] = ($langCookie === 'en') ? "Invalid email address." : "Adresse email invalide.";
     }
     
     $redirect_url = $_SERVER['HTTP_REFERER'] ?? 'index.php';

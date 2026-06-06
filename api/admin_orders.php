@@ -162,15 +162,16 @@ require_once 'header.php';
                         <td class="py-4 font-semibold"><?php echo format_price($order['total_amount']); ?></td>
                         <td class="py-4">
                             <?php
+                            $statusKey = strtolower($order['status']);
                             $statusClass = 'bg-surface-container text-on-surface';
-                            if ($order['status'] === 'pending') $statusClass = 'bg-yellow-500/10 text-yellow-500';
-                            elseif ($order['status'] === 'confirmed') $statusClass = 'bg-blue-500/10 text-blue-500';
-                            elseif ($order['status'] === 'shipped') $statusClass = 'bg-indigo-500/10 text-indigo-500';
-                            elseif ($order['status'] === 'delivered') $statusClass = 'bg-green-500/10 text-green-500';
-                            elseif ($order['status'] === 'cancelled') $statusClass = 'bg-red-500/10 text-red-500';
+                            if ($statusKey === 'pending') $statusClass = 'bg-yellow-500/10 text-yellow-500';
+                            elseif ($statusKey === 'confirmed') $statusClass = 'bg-blue-500/10 text-blue-500';
+                            elseif ($statusKey === 'shipped') $statusClass = 'bg-indigo-500/10 text-indigo-500';
+                            elseif ($statusKey === 'delivered') $statusClass = 'bg-green-500/10 text-green-500';
+                            elseif ($statusKey === 'cancelled') $statusClass = 'bg-red-500/10 text-red-500';
                             ?>
                             <span class="px-2.5 py-1 rounded-full text-xs font-semibold <?php echo $statusClass; ?>">
-                                <?php echo __($order['status']); ?>
+                                <?php echo __($statusKey); ?>
                             </span>
                         </td>
                         <td class="py-4 text-right">

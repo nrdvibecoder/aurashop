@@ -219,11 +219,11 @@ require_once 'header.php';
                         <label class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75">Statut de la commande</label>
                         <select name="status" required
                                 class="bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-0 focus:outline-none transition-colors">
-                            <option value="pending" <?php echo ($order['status'] === 'pending') ? 'selected' : ''; ?>>En attente</option>
-                            <option value="confirmed" <?php echo ($order['status'] === 'confirmed') ? 'selected' : ''; ?>>Confirmée</option>
-                            <option value="shipped" <?php echo ($order['status'] === 'shipped') ? 'selected' : ''; ?>>Expédiée</option>
-                            <option value="delivered" <?php echo ($order['status'] === 'delivered') ? 'selected' : ''; ?>>Livrée</option>
-                            <option value="cancelled" <?php echo ($order['status'] === 'cancelled') ? 'selected' : ''; ?>>Annulée</option>
+                            <option value="pending" <?php echo (strtolower($order['status']) === 'pending') ? 'selected' : ''; ?>>En attente</option>
+                            <option value="confirmed" <?php echo (strtolower($order['status']) === 'confirmed') ? 'selected' : ''; ?>>Confirmée</option>
+                            <option value="shipped" <?php echo (strtolower($order['status']) === 'shipped') ? 'selected' : ''; ?>>Expédiée</option>
+                            <option value="delivered" <?php echo (strtolower($order['status']) === 'delivered') ? 'selected' : ''; ?>>Livrée</option>
+                            <option value="cancelled" <?php echo (strtolower($order['status']) === 'cancelled') ? 'selected' : ''; ?>>Annulée</option>
                         </select>
                     </div>
 
@@ -257,7 +257,7 @@ require_once 'header.php';
                         
                         <div>
                             <span class="font-label-sm text-label-sm uppercase text-primary font-bold">
-                                <?php echo __($hist['status']); ?>
+                                <?php echo __(strtolower($hist['status'])); ?>
                             </span>
                             <span class="text-xs text-on-surface-variant opacity-70 block">
                                 <?php echo date('d/m/Y H:i', strtotime($hist['changed_at'])); ?>

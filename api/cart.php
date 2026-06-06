@@ -1,6 +1,6 @@
 <?php
-$pageTitle = __('cart') . ' – AURA';
 require_once 'config.php';
+$pageTitle = __('cart') . ' – AURA';
 
 $promoMsg = '';
 $promoDiscount = 0;

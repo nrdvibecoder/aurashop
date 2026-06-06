@@ -1,6 +1,6 @@
 <?php
-$pageTitle = __('shop') . ' – AURA';
 require_once 'config.php';
+$pageTitle = __('shop') . ' – AURA';
 
 $category = sanitize($_GET['category'] ?? '');
 $q = sanitize($_GET['q'] ?? '');
