@@ -18,6 +18,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AURA | <?php echo isset($pageTitle) ? sanitize($pageTitle) : 'Architectural Elegance'; ?></title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     
     <!-- Tailwind CSS with Forms and Container Queries -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -145,9 +146,9 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
         <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto relative">
             
             <!-- Left: Burger Menu (Mobile Only) & Desktop Links -->
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-6 min-w-0 flex-1 md:flex-initial">
                 <!-- Mobile Burger Button (only visible on mobile/tablet < md) -->
-                <button id="mobile-menu-trigger" class="md:hidden flex items-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                <button id="mobile-menu-trigger" class="md:hidden flex items-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none flex-shrink-0">
                     <span class="material-symbols-outlined text-2xl">menu</span>
                 </button>
 
@@ -177,13 +178,13 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                 </div>
             </div>
 
-            <!-- Center: Logo -->
-            <div class="absolute left-1/2 -translate-x-1/2 flex items-center">
-                <a href="index.php" class="font-headline-lg text-headline-lg tracking-widest text-on-surface hover:text-primary transition-colors">AURA</a>
+            <!-- Center: Logo (properly centered, absolute but safe with min-width constraints) -->
+            <div class="absolute left-1/2 -translate-x-1/2 flex items-center z-10">
+                <a href="index.php" class="font-headline-lg text-2xl md:text-headline-lg tracking-[0.2em] md:tracking-widest text-on-surface hover:text-primary transition-colors">AURA</a>
             </div>
 
             <!-- Right: Actions -->
-            <div class="flex items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-3 md:gap-6 z-20 flex-shrink-0">
                 <!-- Search bar -->
                 <form action="shop.php" method="GET" class="hidden md:flex items-center relative">
                     <input type="text" name="q" placeholder="<?php echo __('search'); ?>..." class="bg-surface-container border border-outline-variant/20 rounded-full py-1.5 pl-4 pr-10 text-label-sm text-on-surface placeholder:text-outline/40 w-44 focus:w-60 transition-all duration-300">
