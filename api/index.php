@@ -35,14 +35,9 @@ $categories = [
     <div class="carousel-inner w-full h-full relative">
         <?php foreach ($heroSlides as $idx => $slide): ?>
         <div class="carousel-slide absolute inset-0 transition-all duration-1000 <?php echo $idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'; ?>">
-            <picture class="w-full h-full block">
-                <!-- Mobile optimized image -->
-                <source media="(max-width: 767px)" srcset="<?php echo str_replace('.png', '_mobile.png', $slide['img']); ?>">
-                <!-- Default / Desktop optimized image -->
-                <img src="<?php echo $slide['img']; ?>" 
-                     alt="AURA Hero" 
-                     class="w-full h-full object-cover object-center brightness-[0.55] scale-105 transition-transform duration-10000">
-            </picture>
+            <img src="<?php echo $slide['img']; ?>" 
+                 alt="AURA Hero" 
+                 class="w-full h-full object-cover object-top brightness-[0.55] scale-105 transition-transform duration-[10000ms]">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/20 to-surface/60"></div>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-margin-mobile z-10">
                 <p class="font-label-sm text-label-sm tracking-[0.4em] uppercase text-primary mb-6 opacity-0 transition-all duration-700 delay-200" 
@@ -156,16 +151,16 @@ $categories = [
         <span class="font-label-sm text-label-sm tracking-[0.3em] uppercase text-on-surface-variant"><?php echo __('categories'); ?></span>
         <div class="h-px w-24 bg-primary mt-4"></div>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         <?php foreach ($categories as $cat): ?>
-        <div class="relative h-[500px] rounded-lg overflow-hidden group border border-transparent hover:border-primary/20 transition-colors duration-500">
+        <div class="relative h-[280px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden group border border-transparent hover:border-primary/20 transition-colors duration-500">
             <img src="<?php echo $cat['img']; ?>" 
                  alt="<?php echo sanitize($cat['label']); ?>"
-                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-            <div class="absolute bottom-8 left-8">
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-1"><?php echo sanitize($cat['label']); ?></h3>
-                <p class="text-on-surface-variant font-label-sm text-label-sm tracking-widest uppercase"><?php echo sanitize($cat['sub']); ?></p>
+                 class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 md:bottom-8 md:left-8 right-4">
+                <h3 class="font-headline-md text-lg md:text-headline-md text-on-surface mb-0.5 md:mb-1 truncate"><?php echo sanitize($cat['label']); ?></h3>
+                <p class="text-on-surface-variant font-label-sm text-[10px] md:text-label-sm tracking-widest uppercase truncate"><?php echo sanitize($cat['sub']); ?></p>
             </div>
             <a class="absolute inset-0 z-10" href="shop.php?category=<?php echo urlencode($cat['slug']); ?>"></a>
         </div>
