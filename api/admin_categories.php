@@ -11,48 +11,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'create') {
         $name = sanitize($_POST['name'] ?? '');
-        $slug = sanitize($_POST['slug'] ?? '');
-        $image_url = sanitize($_POST['image_url'] ?? '');
 
-        if ($name && $slug) {
-            
-            $slug = strtolower(preg_replace('/[^a-zA-Z0-9-]/', '-', $slug));
+        if ($name) {
             try {
-                $stmt = $pdo->prepare("INSERT INTO categories (name, slug, image_url, is_active) VALUES (?, ?, ?, TRUE)");
-                $stmt->execute([$name, $slug, $image_url ?: '/assets/cat_all.png']);
+                $stmt = $pdo->prepare("INSERT INTO categories (name) VALUES (?)");
+                $stmt->execute([$name]);
                 $success = 'Catégorie créée avec succès.';
             } catch (PDOException $e) {
                 $error = 'Erreur lors de la création : ' . $e->getMessage();
             }
         } else {
-            $error = 'Le nom et le slug sont obligatoires.';
+            $error = 'Le nom de la catégorie est obligatoire.';
         }
     } elseif ($action === 'delete') {
         $categoryId = (int)$_POST['category_id'];
         
         if ($categoryId && $pdo) {
             try {
-                
-                $stmt = $pdo->prepare("SELECT slug FROM categories WHERE id = ?");
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category_id = ?");
                 $stmt->execute([$categoryId]);
-                $cat = $stmt->fetch();
-                
-                if ($cat) {
-                    $slug = $cat['slug'];
-                    
-                    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category = ?");
-                    $stmt->execute([$slug]);
-                    $prodCount = (int)$stmt->fetchColumn();
+                $prodCount = (int)$stmt->fetchColumn();
 
-                    if ($prodCount > 0) {
-                        $error = 'Impossible de supprimer cette catégorie car elle contient ' . $prodCount . ' produit(s).';
-                    } else {
-                        $stmt = $pdo->prepare("DELETE FROM categories WHERE id = ?");
-                        $stmt->execute([$categoryId]);
-                        $success = 'Catégorie supprimée avec succès.';
-                    }
+                if ($prodCount > 0) {
+                    $error = 'Impossible de supprimer cette catégorie car elle contient ' . $prodCount . ' produit(s).';
                 } else {
-                    $error = 'Catégorie introuvable.';
+                    $stmt = $pdo->prepare("DELETE FROM categories WHERE id = ?");
+                    $stmt->execute([$categoryId]);
+                    $success = 'Catégorie supprimée avec succès.';
                 }
             } catch (PDOException $e) {
                 $error = 'Erreur lors de la suppression : ' . $e->getMessage();
@@ -66,8 +51,8 @@ if ($pdo) {
     try {
         
         $stmt = $pdo->query("
-            SELECT c.*, 
-                   (SELECT COUNT(*) FROM products WHERE category = c.slug) as products_count 
+            SELECT c.id, c.name,
+                   (SELECT COUNT(*) FROM products WHERE category_id = c.id) as products_count 
             FROM categories c 
             ORDER BY c.name ASC
         ");
@@ -134,18 +119,6 @@ require_once 'header.php';
                            class="bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-0 focus:outline-none transition-colors">
                 </div>
 
-                <div class="flex flex-col gap-2">
-                    <label class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75">Slug (Identifiant URL)</label>
-                    <input type="text" name="slug" required placeholder="ex: new-arrivals"
-                           class="bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-0 focus:outline-none transition-colors">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75">Image URL (Optionnel)</label>
-                    <input type="text" name="image_url" placeholder="/assets/cat_all.png"
-                           class="bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-0 focus:outline-none transition-colors">
-                </div>
-
                 <button type="submit" class="w-full bg-primary text-on-primary py-3 font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary-fixed transition-all rounded-lg hover:scale-102">
                     Créer la Catégorie
                 </button>
@@ -167,8 +140,6 @@ require_once 'header.php';
                     <thead>
                         <tr class="border-b border-outline-variant/20 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
                             <th class="pb-4">Nom</th>
-                            <th class="pb-4">Slug</th>
-                            <th class="pb-4">Image</th>
                             <th class="pb-4">Produits</th>
                             <th class="pb-4 text-right">Action</th>
                         </tr>
@@ -177,11 +148,7 @@ require_once 'header.php';
                         <?php foreach ($categories as $cat): ?>
                         <tr class="text-on-surface">
                             <td class="py-4 font-semibold"><?php echo sanitize($cat['name']); ?></td>
-                            <td class="py-4 font-mono text-sm"><?php echo sanitize($cat['slug']); ?></td>
-                            <td class="py-4">
-                                <img src="<?php echo sanitize($cat['image_url']); ?>" alt="" class="w-10 h-10 object-cover rounded bg-surface border border-outline-variant/20">
-                            </td>
-                            <td class="py-4"><?php echo $cat['products_count']; ?></td>
+                            <td class="py-4 text-on-surface-variant"><?php echo (int)$cat['products_count']; ?> produit(s)</td>
                             <td class="py-4 text-right">
                                 <form method="POST" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
                                     <input type="hidden" name="action" value="delete">

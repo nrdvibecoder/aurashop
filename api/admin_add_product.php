@@ -9,7 +9,7 @@ $success = '';
 $categories = [];
 if ($pdo) {
     try {
-        $stmt = $pdo->query("SELECT * FROM categories WHERE is_active = TRUE ORDER BY name ASC");
+        $stmt = $pdo->query("SELECT id, name FROM categories ORDER BY name ASC");
         $categories = $stmt->fetchAll();
     } catch (PDOException $e) {
         $error = 'Erreur lors du chargement des catégories.';
@@ -18,39 +18,35 @@ if ($pdo) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = sanitize($_POST['name'] ?? '');
-    $category = sanitize($_POST['category'] ?? '');
+    $category_id = (int)($_POST['category_id'] ?? 0);
     $subcategory = sanitize($_POST['subcategory'] ?? '');
     $price = (int)($_POST['price'] ?? 0);
-    $discount = (float)($_POST['discount'] ?? 0);
+    $discount = (int)($_POST['discount'] ?? 0);
     $stock = (int)($_POST['stock'] ?? 0);
-    $is_featured = isset($_POST['is_featured']) ? 1 : 0;
-    $is_new_arrival = isset($_POST['is_new_arrival']) ? 1 : 0;
+    $is_featured = isset($_POST['is_featured']) ? 'true' : 'false';
+    $is_new_arrival = isset($_POST['is_new_arrival']) ? 'true' : 'false';
     $description = sanitize($_POST['description'] ?? '');
 
-    
     $colors = $_POST['colors'] ?? '[]';
     $sizes = $_POST['sizes'] ?? '[]';
     $color_images = $_POST['color_images'] ?? '{}';
     $base64_image = $_POST['base64_image'] ?? '';
 
-    
-    if (empty($name) || empty($category) || $price <= 0) {
+    if (empty($name) || $category_id <= 0 || $price <= 0) {
         $error = 'Le nom, la catégorie et le prix sont obligatoires.';
     } else {
         try {
             $stmt = $pdo->prepare("
                 INSERT INTO products 
-                (name, category, subcategory, price, discount, stock, is_featured, is_new_arrival, description, colors, sizes, color_images, base64_image, image_url)
+                (name, category_id, subcategory, price, discount, stock, is_featured, is_new_arrival, description, colors, sizes, color_images, base64_image, image_url)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?::jsonb, ?::jsonb, ?, ?)
             ");
-            
             $stmt->execute([
-                $name, $category, $subcategory, $price, $discount, $stock, 
-                $is_featured ? 'true' : 'false', $is_new_arrival ? 'true' : 'false', 
+                $name, $category_id, $subcategory, $price, $discount, $stock,
+                $is_featured, $is_new_arrival,
                 $description, $colors, $sizes, $color_images, $base64_image, $base64_image
             ]);
             $success = 'Produit ajouté avec succès !';
-            
             $_POST = [];
             $base64_image = '';
         } catch (PDOException $e) {
@@ -115,11 +111,11 @@ require_once 'header.php';
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75">Catégorie</label>
-                        <select name="category" required
+                        <select name="category_id" required
                                 class="bg-surface border border-outline-variant/20 rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-0 focus:outline-none transition-colors">
                             <option value="">Sélectionner...</option>
                             <?php foreach ($categories as $cat): ?>
-                            <option value="<?php echo sanitize($cat['slug']); ?>" <?php echo (($_POST['category'] ?? '') === $cat['slug']) ? 'selected' : ''; ?>>
+                            <option value="<?php echo (int)$cat['id']; ?>" <?php echo (((int)($_POST['category_id'] ?? 0)) === (int)$cat['id']) ? 'selected' : ''; ?>>
                                 <?php echo sanitize($cat['name']); ?>
                             </option>
                             <?php endforeach; ?>

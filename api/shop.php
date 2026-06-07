@@ -28,7 +28,7 @@ if ($pdo) {
         $params = [$minPrice, $maxPrice];
 
         if ($category) {
-            $conditions[] = 'LOWER(p.category) = LOWER(?)';
+            $conditions[] = 'LOWER(c.name) = LOWER(?)';
             $params[] = $category;
         }
 
@@ -56,7 +56,7 @@ if ($pdo) {
         };
 
         $where = implode(' AND ', $conditions);
-        $sql = "SELECT p.* FROM products p WHERE $where ORDER BY $orderBy";
+        $sql = "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE $where ORDER BY $orderBy";
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         $products = $stmt->fetchAll();

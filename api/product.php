@@ -23,8 +23,8 @@ if ($pdo) {
         }
 
         
-        $stmt2 = $pdo->prepare("SELECT * FROM products WHERE category = ? AND id != ? LIMIT 4");
-        $stmt2->execute([$product['category'], $id]);
+        $stmt2 = $pdo->prepare("SELECT * FROM products WHERE category_id = ? AND id != ? LIMIT 4");
+        $stmt2->execute([$product['category_id'], $id]);
         $relatedProducts = $stmt2->fetchAll();
     } catch (PDOException $e) {
         $error = $e->getMessage();
