@@ -241,9 +241,11 @@ require_once 'header.php';
                             
                             <!-- Display existing thumbnails -->
                             <div id="color-thumbnails-<?php echo $idx; ?>" class="flex flex-wrap gap-3 mt-4">
-                                <?php foreach ($imgs as $imgBase64): ?>
-                                <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-outline-variant/20">
+                                <?php foreach ($imgs as $imgIdx => $imgBase64): ?>
+                                <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-outline-variant/20" data-array-index="<?php echo $imgIdx; ?>">
                                     <img src="<?php echo $imgBase64; ?>" class="w-full h-full object-cover">
+                                    <button type="button" onclick="removeColorThumbnail(this, <?php echo $idx; ?>)" 
+                                        class="absolute top-0.5 right-0.5 w-5 h-5 bg-error text-on-error rounded-full flex items-center justify-center text-xs font-bold hover:scale-110 transition-transform">✕</button>
                                 </div>
                                 <?php endforeach; ?>
                             </div>

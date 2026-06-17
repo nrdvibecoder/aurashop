@@ -143,7 +143,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
 <body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col overflow-x-hidden">
     <!-- Top Navigation Bar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 h-20 transition-all duration-300">
-        <div class="flex justify-between items-center px-6 md:px-margin-desktop h-full max-w-container-max mx-auto relative">
+        <div class="flex justify-between items-center px-6 lg:px-margin-desktop h-full max-w-container-max mx-auto relative">
 
             <!-- ===== MOBILE LAYOUT: AURA far-left, actions far-right ===== -->
             <!-- ===== DESKTOP LAYOUT: nav-links left, AURA center, actions right ===== -->
@@ -151,10 +151,10 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
             <!-- Left slot -->
             <div class="flex items-center gap-6">
                 <!-- Mobile: AURA title (extreme left) -->
-                <a href="index.php" class="md:hidden font-headline-lg text-xl tracking-[0.25em] text-on-surface hover:text-primary transition-colors">AURA</a>
+                <a href="index.php" class="lg:hidden font-headline-lg text-xl tracking-[0.25em] text-on-surface hover:text-primary transition-colors">AURA</a>
 
                 <!-- Desktop: Category dropdown + nav links -->
-                <div class="hidden md:flex items-center gap-6">
+                <div class="hidden lg:flex items-center gap-6">
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest py-2">
                             <span><?php echo __('categories'); ?></span>
@@ -176,20 +176,20 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
             </div>
 
             <!-- Center: AURA logo — Desktop only -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2">
+            <div class="hidden lg:flex absolute left-1/2 -translate-x-1/2">
                 <a href="index.php" class="font-headline-lg text-headline-lg tracking-widest text-on-surface hover:text-primary transition-colors">AURA</a>
             </div>
 
             <!-- Right slot: actions -->
-            <div class="flex items-center gap-3 md:gap-6">
+            <div class="flex items-center gap-3 lg:gap-6">
                 <!-- Search (desktop) -->
-                <form action="shop.php" method="GET" class="hidden md:flex items-center relative">
+                <form action="shop.php" method="GET" class="hidden lg:flex items-center relative">
                     <input type="text" name="q" placeholder="<?php echo __('search'); ?>..." class="bg-surface-container border border-outline-variant/20 rounded-full py-1.5 pl-4 pr-10 text-label-sm text-on-surface placeholder:text-outline/40 w-44 focus:w-60 transition-all duration-300">
                     <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant hover:text-primary text-xl">search</button>
                 </form>
 
                 <!-- Search icon (mobile) -->
-                <a href="shop.php" class="md:hidden material-symbols-outlined text-[22px] text-on-surface-variant hover:text-primary transition-colors">search</a>
+                <a href="shop.php" class="lg:hidden material-symbols-outlined text-[22px] text-on-surface-variant hover:text-primary transition-colors">search</a>
 
                 <!-- Language toggle -->
                 <a href="set_lang.php?lang=<?php echo $toggleLang; ?>" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest"><?php echo $toggleLangLabel; ?></a>
@@ -204,7 +204,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
 
                 <!-- Account dropdown (desktop only) -->
                 <?php if ($auth): ?>
-                    <div class="relative group hidden md:block">
+                    <div class="relative group hidden lg:block">
                         <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors py-2">
                             <span class="material-symbols-outlined text-2xl">account_circle</span>
                         </button>
@@ -219,11 +219,11 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                         </div>
                     </div>
                 <?php else: ?>
-                    <a href="login.php" class="hidden md:inline material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">account_circle</a>
+                    <a href="login.php" class="hidden lg:inline material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">account_circle</a>
                 <?php endif; ?>
 
                 <!-- Hamburger (mobile only) -->
-                <button id="mobile-menu-trigger" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] text-on-surface-variant hover:text-primary transition-colors focus:outline-none" aria-label="Menu">
+                <button id="mobile-menu-trigger" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] text-on-surface-variant hover:text-primary transition-colors focus:outline-none" aria-label="Menu">
                     <span class="block w-5 h-[1.5px] bg-current"></span>
                     <span class="block w-5 h-[1.5px] bg-current"></span>
                     <span class="block w-3 h-[1.5px] bg-current self-start"></span>
@@ -234,7 +234,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
 
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden">
         <div id="mobile-drawer-content" class="w-80 h-full bg-surface-container-lowest border-r border-outline-variant/10 flex flex-col justify-between p-8 -translate-x-full transition-transform duration-300 ease-out">
             <div>
                 <!-- Header of Drawer -->
