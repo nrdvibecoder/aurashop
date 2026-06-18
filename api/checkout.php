@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAuth();
 
-$pageTitle = __('checkout') . ' – AURA';
+$pageTitle = __('checkout');
 
 $deliveryZones = [];
 if ($pdo) {

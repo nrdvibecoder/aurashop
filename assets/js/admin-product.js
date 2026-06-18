@@ -63,45 +63,98 @@ function removeColorBlock(btn) {
     block.remove();
 }
 
+// Helper function for compressing images
+function compressAndResizeImage(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const maxDimension = 1200;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxDimension) {
+                    height = Math.round((height * maxDimension) / width);
+                    width = maxDimension;
+                }
+            } else {
+                if (height > maxDimension) {
+                    width = Math.round((width * maxDimension) / height);
+                    height = maxDimension;
+                }
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Compress to JPEG with 0.8 quality
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            callback(compressedBase64);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
 function handleColorImages(event, idx) {
     const files = Array.from(event.target.files);
     const thumbContainer = document.getElementById(`color-thumbnails-${idx}`);
     if (!colorBlocks[idx]) colorBlocks[idx] = { files: [] };
 
     files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            colorBlocks[idx].files.push(e.target.result);
+        compressAndResizeImage(file, function(compressedBase64) {
+            colorBlocks[idx].files.push(compressedBase64);
+            const arrayIndex = colorBlocks[idx].files.length - 1;
 
             const thumb = document.createElement('div');
             thumb.className = 'relative w-20 h-20 rounded-lg overflow-hidden border border-outline-variant/20';
+            thumb.dataset.arrayIndex = arrayIndex;
             thumb.innerHTML = `
-                <img src="${e.target.result}" class="w-full h-full object-cover">
-                <button type="button" onclick="this.parentNode.remove()" 
+                <img src="${compressedBase64}" class="w-full h-full object-cover">
+                <button type="button" onclick="removeColorThumbnail(this, ${idx})" 
                     class="absolute top-0.5 right-0.5 w-5 h-5 bg-error text-on-error rounded-full flex items-center justify-center text-xs font-bold hover:scale-110 transition-transform">✕</button>
             `;
             thumbContainer.appendChild(thumb);
-        };
-        reader.readAsDataURL(file);
+        });
     });
+}
+
+function removeColorThumbnail(btn, idx) {
+    const thumb = btn.closest('[data-array-index]');
+    const arrayIndex = parseInt(thumb.dataset.arrayIndex);
+    if (colorBlocks[idx]) {
+        // Remove item from array and mark it as null or filter it out, or slice
+        colorBlocks[idx].files.splice(arrayIndex, 1);
+        // Re-index all remaining thumbnails in the DOM
+        const container = document.getElementById(`color-thumbnails-${idx}`);
+        const thumbs = container.querySelectorAll('[data-array-index]');
+        thumbs.forEach((t, index) => {
+            t.dataset.arrayIndex = index;
+        });
+    }
+    thumb.remove();
 }
 
 // Handle main image preview
 function handleMainImage(event) {
     const file = event.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
+
+    compressAndResizeImage(file, function(compressedBase64) {
         const preview = document.getElementById('main-image-preview');
         const previewContainer = document.getElementById('main-image-preview-container');
         if (preview) {
-            preview.src = e.target.result;
+            preview.src = compressedBase64;
             previewContainer.classList.remove('hidden');
         }
         const base64Input = document.getElementById('base64-image-input');
-        if (base64Input) base64Input.value = e.target.result;
-    };
-    reader.readAsDataURL(file);
+        if (base64Input) base64Input.value = compressedBase64;
+    });
 }
 
 // Serialize everything on form submit

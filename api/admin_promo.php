@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Gestion des Codes Promo – AURA';
+$pageTitle = 'Gestion des Codes Promo';
 $error = '';
 $success = '';
 

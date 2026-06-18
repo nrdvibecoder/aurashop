@@ -36,7 +36,7 @@ if ($pdo) {
     exit;
 }
 
-$pageTitle = sanitize($product['name']) . ' – AURA';
+$pageTitle = sanitize($product['name']);
 
 $colors = !empty($product['colors']) ? json_decode($product['colors'], true) : [];
 $sizes = !empty($product['sizes']) ? json_decode($product['sizes'], true) : [];
@@ -141,14 +141,11 @@ require_once 'header.php';
                 <div class="flex justify-between items-center mb-3">
                     <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant"><?php echo __('select_size'); ?></span>
                 </div>
-                <div class="grid grid-cols-5 gap-2">
-                    <?php foreach (['XS','S','M','L','XL','XXL'] as $sz): 
-                        $available = in_array($sz, $sizes);
-                    ?>
-                    <button class="py-3 border font-label-sm text-label-sm transition-all rounded-lg <?php echo $available ? 'border-outline-variant/30 text-on-surface hover:border-primary' : 'border-outline-variant/10 text-outline/30 cursor-not-allowed line-through'; ?>"
-                            data-size-btn="<?php echo $sz; ?>"
-                            <?php echo !$available ? 'disabled data-disabled="true"' : ''; ?>>
-                        <?php echo $sz; ?>
+                <div class="flex gap-2 flex-wrap">
+                    <?php foreach ($sizes as $sz): ?>
+                    <button class="py-3 px-6 border font-label-sm text-label-sm transition-all rounded-lg border-outline-variant/30 text-on-surface hover:border-primary"
+                            data-size-btn="<?php echo sanitize($sz); ?>">
+                        <?php echo sanitize($sz); ?>
                     </button>
                     <?php endforeach; ?>
                 </div>
@@ -161,14 +158,14 @@ require_once 'header.php';
             <div class="space-y-4">
                 <div class="flex items-center gap-4">
                     <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant"><?php echo __('quantity'); ?></span>
-                    <div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
-                        <button id="qty-minus" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
-                            <span class="material-symbols-outlined">remove</span>
+                    <div class="flex items-center border border-outline-variant/20 rounded-full bg-surface-container-lowest p-1">
+                        <button id="qty-minus" type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-base">remove</span>
                         </button>
                         <input id="qty-input" type="number" value="1" min="1" max="<?php echo max(1, (int)$product['stock']); ?>"
-                               class="w-14 text-center bg-transparent border-0 font-body-md text-on-surface focus:ring-0 focus:outline-none">
-                        <button id="qty-plus" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
-                            <span class="material-symbols-outlined">add</span>
+                               class="w-12 text-center bg-transparent border-0 font-body-md text-on-surface focus:ring-0 focus:outline-none p-0 select-none">
+                        <button id="qty-plus" type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-base">add</span>
                         </button>
                     </div>
                     <span class="font-label-sm text-label-sm text-outline">

@@ -760,20 +760,28 @@ colorSwatches.forEach(swatch => {
 const sizeButtons = document.querySelectorAll('[data-size-btn]');
 
 sizeButtons.forEach(btn => {
-    if (btn.dataset.disabled === 'true') return;  // Ignorer les tailles indisponibles
+    if (btn.dataset.disabled === 'true') return;
 
     btn.addEventListener('click', () => {
         window.selectedSize = btn.dataset.sizeBtn;  // Ex: "M"
 
         // Retirer le style actif de tous les boutons
         sizeButtons.forEach(b => {
-            b.classList.remove('border-primary', 'text-primary', 'bg-primary/10');
-            b.classList.add('border-outline-variant/30', 'text-on-surface');
+            if (b.dataset.disabled !== 'true') {
+                b.classList.remove('border-primary', 'text-primary', 'bg-primary/10');
+                b.classList.add('border-outline-variant/30', 'text-on-surface');
+            }
         });
         // Appliquer le style au bouton sélectionné
         btn.classList.add('border-primary', 'text-primary', 'bg-primary/10');
     });
 });
+
+// Pré-sélection automatique de la première taille disponible au chargement de la page
+const firstSizeBtn = document.querySelector('[data-size-btn]:not([data-disabled="true"])');
+if (firstSizeBtn) {
+    firstSizeBtn.click();
+}
 ```
 
 ### Bouton "Ajouter au Panier"

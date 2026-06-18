@@ -34,7 +34,7 @@ try {
     $error = $e->getMessage();
 }
 
-$pageTitle = __('order_success') . ' – AURA';
+$pageTitle = __('order_success');
 require_once 'header.php';
 ?>
 

@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Paramètres de Livraison – AURA';
+$pageTitle = 'Paramètres de Livraison';
 $error = '';
 $success = '';
 

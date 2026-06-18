@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Gestion des Commandes – AURA';
+$pageTitle = 'Gestion des Commandes';
 $error = '';
 
 $statusFilter = sanitize($_GET['status'] ?? '');

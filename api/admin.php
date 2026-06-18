@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Dashboard Admin – AURA';
+$pageTitle = 'Dashboard Admin';
 $error = '';
 
 $kpi = [

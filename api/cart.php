@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-$pageTitle = __('cart') . ' – AURA';
+$pageTitle = __('cart');
 
 $promoMsg = '';
 $promoDiscount = 0;
@@ -183,15 +183,15 @@ function renderCart() {
                     ${item.color ? item.color + ' · ' : ''}${item.size ? item.size : ''}
                 </p>
                 <div class="flex items-center justify-between mt-4 flex-wrap gap-3">
-                    <div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
+                    <div class="flex items-center border border-outline-variant/20 rounded-full bg-surface-container-lowest p-0.5">
                         <button onclick="changeQty(${item.product_id}, '${item.color}', '${item.size}', -1)" 
-                                class="w-9 h-9 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
-                            <span class="material-symbols-outlined text-lg">remove</span>
+                                class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-base">remove</span>
                         </button>
-                        <span class="w-10 text-center font-body-md text-on-surface">${item.quantity}</span>
+                        <span class="w-10 text-center font-body-md text-on-surface select-none">${item.quantity}</span>
                         <button onclick="changeQty(${item.product_id}, '${item.color}', '${item.size}', 1)"
-                                class="w-9 h-9 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
-                            <span class="material-symbols-outlined text-lg">add</span>
+                                class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-base">add</span>
                         </button>
                     </div>
                     <span class="font-body-md text-primary font-medium">${formatDA(subtotalItem)}</span>

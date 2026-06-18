@@ -139,6 +139,18 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
           }
         }
     </script>
+    <style>
+        /* Chrome, Safari, Edge, Opera: Hide input number spinners */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Firefox: Hide input number spinners */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 <body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col overflow-x-hidden">
     <!-- Top Navigation Bar -->
@@ -168,11 +180,9 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                             <div class="border-t border-outline-variant/10 my-2"></div>
                             <a href="shop.php" class="block px-6 py-3 text-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors font-medium"><?php echo __('all'); ?></a>
                         </div>
-                    </div>
-                    <a href="shop.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('shop'); ?></a>
-                    <a href="about.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('about'); ?></a>
-                    <a href="contact.php" class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest"><?php echo __('contact'); ?></a>
-                </div>
+                            </div>
+
+                            </div>
             </div>
 
             <!-- Center: AURA logo — Desktop only -->
@@ -223,10 +233,14 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                 <?php endif; ?>
 
                 <!-- Hamburger (mobile only) -->
-                <button id="mobile-menu-trigger" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] text-on-surface-variant hover:text-primary transition-colors focus:outline-none" aria-label="Menu">
-                    <span class="block w-5 h-[1.5px] bg-current"></span>
-                    <span class="block w-5 h-[1.5px] bg-current"></span>
-                    <span class="block w-3 h-[1.5px] bg-current self-start"></span>
+               <button
+                    id="mobile-menu-trigger"
+                    class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-on-surface-variant hover:text-primary transition-colors focus:outline-none"
+                    aria-label="Menu"
+                >
+                    <span class="block w-6 h-px bg-current"></span>
+                    <span class="block w-6 h-px bg-current"></span>
+                    <span class="block w-6 h-px bg-current"></span>
                 </button>
             </div>
         </div>
@@ -235,7 +249,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
 
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden">
-        <div id="mobile-drawer-content" class="w-80 h-full bg-surface-container-lowest border-r border-outline-variant/10 flex flex-col justify-between p-8 -translate-x-full transition-transform duration-300 ease-out">
+        <div id="mobile-drawer-content" class="w-80 h-full bg-surface-container-lowest border-l border-outline-variant/10 flex flex-col justify-between p-8 ml-auto translate-x-full transition-transform duration-300 ease-out">
             <div>
                 <!-- Header of Drawer -->
                 <div class="flex justify-between items-center mb-8">
@@ -297,13 +311,13 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
             function openDrawer() {
                 drawer.classList.remove('opacity-0', 'pointer-events-none');
                 drawer.classList.add('opacity-100');
-                drawerContent.classList.remove('-translate-x-full');
+                drawerContent.classList.remove('translate-x-full');
             }
 
             function closeDrawer() {
                 drawer.classList.remove('opacity-100');
                 drawer.classList.add('opacity-0', 'pointer-events-none');
-                drawerContent.classList.add('-translate-x-full');
+                drawerContent.classList.add('translate-x-full');
             }
 
             if (trigger) trigger.addEventListener('click', openDrawer);

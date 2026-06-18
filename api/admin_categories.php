@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Gestion des Catégories – AURA';
+$pageTitle = 'Gestion des Catégories';
 $error = '';
 $success = '';
 

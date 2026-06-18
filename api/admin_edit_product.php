@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Modifier le Produit – AURA';
+$pageTitle = 'Modifier le Produit';
 $error = '';
 $success = '';
 $product = null;

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Accueil – Élégance Architecturale';
+$pageTitle = 'Accueil';
 require_once 'config.php';
 require_once 'header.php';
 
@@ -19,14 +19,14 @@ if ($pdo) {
 $heroSlides = [
     ['img' => 'assets/hero1.png', 'title' => __('hero_title'), 'sub' => __('hero_subtitle')],
     ['img' => 'assets/hero2.png', 'title' => 'LA COLLECTION AUTOMNE', 'sub' => __('discover_pieces')],
-    ['img' => 'assets/hero3.png', 'title' => 'PIECES D\'EXCEPTION', 'sub' => __('explore')],
+    ['img' => 'assets/hero3.png', 'title' => 'PIECES D\'EXCEPTION', 'sub' => __('Laissez-vous Inspirer.')],
 ];
 
 $categories = [
-    ['slug' => 'Women',      'label' => __('women'),       'img' => 'assets/cat_women.png',      'sub' => 'Capsule Collection'],
-    ['slug' => 'Men',        'label' => __('men'),         'img' => 'assets/cat_men.png',        'sub' => 'The Archive'],
-    ['slug' => 'Accessories','label' => __('accessories'), 'img' => 'assets/cat_accessories.png','sub' => 'Curated Goods'],
-    ['slug' => 'Unisex',     'label' => __('unisex'),      'img' => 'assets/cat_unisex.png',     'sub' => 'The Essentials'],
+    ['slug' => 'Women',      'label' => __('women'),       'img' => 'assets/cat_women.png',      'sub' => 'Élégance Intemporelle'],
+    ['slug' => 'Men',        'label' => __('men'),         'img' => 'assets/cat_men.png',        'sub' => 'Style Essentiel'],
+    ['slug' => 'Accessories','label' => __('accessories'), 'img' => 'assets/cat_accessories.png','sub' => 'La Touche Finale'],
+    ['slug' => 'Unisex',     'label' => __('unisex'),      'img' => 'assets/cat_unisex.png',     'sub' => 'Pour Tous'],
 ];
 ?>
 
@@ -41,7 +41,7 @@ $categories = [
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/20 to-surface/60"></div>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-margin-mobile z-10">
                 <p class="font-label-sm text-label-sm tracking-[0.4em] uppercase text-primary mb-6 opacity-0 transition-all duration-700 delay-200" 
-                   data-hero-animate>AURA COLLECTION</p>
+                   data-hero-animate>AURA</p>
                 <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-8 tracking-tight max-w-3xl opacity-0 transition-all duration-700 delay-300 translate-y-4"
                     data-hero-animate>
                     <?php echo sanitize($slide['title']); ?>
@@ -230,7 +230,7 @@ $categories = [
             <p class="text-on-surface-variant font-body-lg text-body-lg mb-10">Accédez en avant-première aux nouvelles collections et à nos événements saisonniers.</p>
             <form action="" method="POST" class="flex flex-col md:flex-row gap-4">
                 <input class="flex-grow bg-transparent border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 text-on-surface placeholder:text-outline py-4 transition-all duration-300 text-body-md" 
-                       placeholder="email@exemple.com" 
+                       placeholder="votremail@xxx.com" 
                        type="email" 
                        name="newsletter_email"
                        required>

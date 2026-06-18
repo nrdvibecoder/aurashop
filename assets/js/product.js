@@ -60,11 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Pre-select first color on page load
+    const firstColorBtn = document.querySelector('[data-color-swatch]');
+    if (firstColorBtn) {
+        window.selectedColor = firstColorBtn.dataset.colorSwatch;
+    }
+
+    // Set forced size if sizes are not defined (e.g., accessories)
+    const forcedSizeEl = document.getElementById('forced-size');
+    if (forcedSizeEl) {
+        window.selectedSize = forcedSizeEl.value;
+    }
+
     // ── Size Button Selection ──
     sizeButtons.forEach(btn => {
         if (btn.dataset.disabled === 'true') return;
         btn.addEventListener('click', () => {
-            window.selectedSize = btn.dataset.sizebtn;
+            window.selectedSize = btn.dataset.sizeBtn;
             sizeButtons.forEach(b => {
                 if (b.dataset.disabled !== 'true') {
                     b.classList.remove('border-primary', 'text-primary', 'bg-primary/10');
@@ -75,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('border-primary', 'text-primary', 'bg-primary/10');
         });
     });
+
+    // Pre-select first size on page load if size buttons exist
+    const firstSizeBtn = document.querySelector('[data-size-btn]:not([data-disabled="true"])');
+    if (firstSizeBtn) {
+        firstSizeBtn.click();
+    }
 
     // ── Quantity Stepper ──
     if (qtyPlus) {

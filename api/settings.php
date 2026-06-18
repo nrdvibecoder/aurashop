@@ -4,7 +4,7 @@ require_once 'config.php';
 $auth = requireAuth();
 $userId = $auth['id'];
 
-$pageTitle = __('my_account') . ' – AURA';
+$pageTitle = __('my_account');
 $error = '';
 $success = '';
 

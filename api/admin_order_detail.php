@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Détails de Commande – AURA';
+$pageTitle = 'Détails de Commande';
 $error = '';
 $success = '';
 $order = null;

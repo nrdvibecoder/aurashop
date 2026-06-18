@@ -2,7 +2,7 @@
 require_once 'config.php';
 $auth = requireAdmin();
 
-$pageTitle = 'Gestion des Clients – AURA';
+$pageTitle = 'Gestion des Clients';
 $error = '';
 $success = '';
 
