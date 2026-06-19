@@ -112,7 +112,7 @@ $categories = [
                 <a href="product.php?id=<?php echo (int)$product['id']; ?>">
                     <img src="<?php echo sanitize($imgSrc); ?>" 
                          alt="<?php echo sanitize($product['name']); ?>"
-                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
+                         class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
                 </a>
                 <?php if ($product['is_new_arrival']): ?>
                 <span class="absolute top-4 left-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-3 py-1 rounded-full"><?php echo __('new_label'); ?></span>
@@ -191,7 +191,7 @@ $categories = [
                 <a href="product.php?id=<?php echo (int)$product['id']; ?>">
                     <img src="<?php echo sanitize($imgSrc); ?>" 
                          alt="<?php echo sanitize($product['name']); ?>"
-                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
+                         class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
                 </a>
                 <?php if ($product['discount'] > 0): ?>
                 <span class="absolute top-4 right-4 bg-error text-on-error font-label-sm text-label-sm px-3 py-1 rounded-full">-<?php echo (int)$product['discount']; ?>%</span>

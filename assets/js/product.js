@@ -107,12 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Add to Cart ──
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', () => {
-            if (!window.selectedColor) {
+            const hasColors = colorSwatches.length > 0;
+            const hasSizes = sizeButtons.length > 0;
+
+            if (hasColors && !window.selectedColor) {
                 showInlineError('Veuillez sélectionner une couleur. / Please select a color.');
                 shakeBtn(addToCartBtn);
                 return;
             }
-            if (!window.selectedSize) {
+            if (hasSizes && !window.selectedSize) {
                 showInlineError('Veuillez sélectionner une taille. / Please select a size.');
                 shakeBtn(addToCartBtn);
                 return;
@@ -123,8 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const productPrice = parseInt(addToCartBtn.dataset.productPrice);
             const productImage = mainImage ? mainImage.src : '';
             const qty = parseInt(qtyInput ? qtyInput.value : 1);
+            const colorToUse = window.selectedColor || '';
+            const sizeToUse = window.selectedSize || 'Unique';
 
-            addToCart(productId, productName, window.selectedColor, window.selectedSize, productPrice, productImage, qty);
+            addToCart(productId, productName, colorToUse, sizeToUse, productPrice, productImage, qty);
             showToast('Ajouté au panier ! / Added to cart!');
         });
     }

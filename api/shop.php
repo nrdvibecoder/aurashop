@@ -186,7 +186,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                         <a href="product.php?id=<?php echo (int)$product['id']; ?>">
                             <img src="<?php echo sanitize($imgSrc); ?>" 
                                  alt="<?php echo sanitize($product['name']); ?>"
-                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                                 class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                                  loading="lazy">
                         </a>
                         <?php if ($product['is_new_arrival']): ?>
