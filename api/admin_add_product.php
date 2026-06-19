@@ -215,8 +215,8 @@ require_once 'header.php';
                     $availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'TU'];
                     foreach ($availableSizes as $sz):
                     ?>
-                    <label class="flex items-center justify-center border border-outline-variant/20 rounded-lg p-3 hover:bg-surface-container-high cursor-pointer transition-colors">
-                        <input type="checkbox" name="size[]" value="<?php echo $sz; ?>" class="hidden peer">
+                    <label class="flex items-center justify-center border border-outline-variant/20 rounded-lg p-3 hover:bg-surface-container-high cursor-pointer transition-colors size-label">
+                        <input type="checkbox" name="size[]" value="<?php echo $sz; ?>" class="sr-only peer">
                         <span class="font-label-sm text-label-sm text-on-surface peer-checked:text-primary peer-checked:font-bold"><?php echo $sz; ?></span>
                     </label>
                     <?php endforeach; ?>
@@ -248,8 +248,12 @@ require_once 'header.php';
 
 <style>
 /* CSS Peer Styling for Size Buttons */
+.size-label:has(input[type="checkbox"]:checked) {
+    border-color: var(--md-sys-color-primary, #b2cdbc) !important;
+    background-color: rgba(178, 205, 188, 0.1) !important;
+}
 input[type="checkbox"]:checked + span {
-    color: var(--md-sys-color-primary, #b2cdbc);
+    color: var(--md-sys-color-primary, #b2cdbc) !important;
     font-weight: 700;
 }
 input[type="checkbox"]:checked ~ parent, 
