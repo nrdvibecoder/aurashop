@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once 'header.php';
 ?>
 
-<div class="min-h-screen flex items-center justify-center py-20 px-margin-mobile relative overflow-hidden bg-black -mt-24">
+<div class="h-screen flex items-center justify-center px-margin-mobile relative overflow-hidden bg-black -mt-24">
     <!-- Premium Architectural Blurred Backdrop -->
     <div class="absolute inset-0 bg-cover bg-center scale-105 filter blur-2xl opacity-40 brightness-50" style="background-image: url('assets/hero3.png');"></div>
 
@@ -113,5 +113,5 @@ require_once 'header.php';
         </div>
     </div>
 </div>
-
-<?php require_once 'footer.php'; ?>
+</body>
+</html>

@@ -57,6 +57,14 @@ if (!empty($colors) && !empty($colorImages)) {
 require_once 'header.php';
 ?>
 
+<style>
+    .size-btn[data-selected="true"] {
+        border-color: var(--color-primary, #8B7355);
+        color: var(--color-primary, #8B7355);
+        background-color: color-mix(in srgb, var(--color-primary, #8B7355) 10%, transparent);
+    }
+</style>
+
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 pb-16">
     <!-- Breadcrumb -->
     <nav class="flex gap-2 font-label-sm text-label-sm text-on-surface-variant mb-10 flex-wrap">
@@ -143,8 +151,9 @@ require_once 'header.php';
                 </div>
                 <div class="flex gap-2 flex-wrap">
                     <?php foreach ($sizes as $sz): ?>
-                    <button class="py-3 px-6 border font-label-sm text-label-sm transition-all rounded-lg border-outline-variant/30 text-on-surface hover:border-primary"
-                            data-size-btn="<?php echo sanitize($sz); ?>">
+                    <button class="size-btn py-3 px-6 border font-label-sm text-label-sm transition-all rounded-lg border-outline-variant/30 text-on-surface hover:border-primary data-[selected=true]:border-primary data-[selected=true]:text-primary data-[selected=true]:bg-primary/10"
+                            data-size-btn="<?php echo sanitize($sz); ?>"
+                            data-selected="false">
                         <?php echo sanitize($sz); ?>
                     </button>
                     <?php endforeach; ?>
