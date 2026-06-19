@@ -92,7 +92,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-10">
     <?php if ($error): ?>
     <div class="bg-error-container text-on-error-container p-6 rounded-xl mb-8 font-body-md">
-        Erreur de base de données. Veuillez réessayer plus tard.
+        <?php echo __('db_error'); ?>
     </div>
     <?php endif; ?>
 
@@ -186,7 +186,7 @@ $hasBanner = $category && isset($categoryImages[$category]);
                         <a href="product.php?id=<?php echo (int)$product['id']; ?>">
                             <img src="<?php echo sanitize($imgSrc); ?>" 
                                  alt="<?php echo sanitize($product['name']); ?>"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                                  loading="lazy">
                         </a>
                         <?php if ($product['is_new_arrival']): ?>

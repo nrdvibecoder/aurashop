@@ -85,7 +85,7 @@ require_once 'header.php';
                 <img id="main-product-image" 
                      src="<?php echo sanitize(!empty($firstColorImgs) ? $firstColorImgs[0] : $mainImgSrc); ?>" 
                      alt="<?php echo sanitize($product['name']); ?>"
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
                 <?php if ($product['stock'] == 0): ?>
                 <div class="absolute inset-0 bg-surface/50 flex items-center justify-center">
                     <span class="font-label-sm text-label-sm uppercase tracking-widest border border-outline-variant px-6 py-3 text-on-surface"><?php echo __('out_of_stock'); ?></span>
@@ -100,7 +100,7 @@ require_once 'header.php';
                 foreach ($galleryImgs as $tIdx => $tSrc): 
                 ?>
                 <button class="aspect-square overflow-hidden rounded-xl bg-surface-container-low border-2 transition-all <?php echo $tIdx === 0 ? 'border-primary' : 'border-transparent hover:border-outline-variant'; ?>">
-                    <img src="<?php echo sanitize($tSrc); ?>" alt="Thumbnail <?php echo $tIdx + 1; ?>" class="w-full h-full object-cover">
+                    <img src="<?php echo sanitize($tSrc); ?>" alt="Thumbnail <?php echo $tIdx + 1; ?>" class="w-full h-full object-contain">
                 </button>
                 <?php endforeach; ?>
             </div>
@@ -237,7 +237,7 @@ require_once 'header.php';
                 <div class="aspect-[3/4] overflow-hidden rounded-xl bg-surface-container mb-4 relative">
                     <a href="product.php?id=<?php echo (int)$rel['id']; ?>">
                         <img src="<?php echo sanitize($relImg); ?>" alt="<?php echo sanitize($rel['name']); ?>" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                             class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     </a>
                     <button class="absolute bottom-4 right-4 bg-surface/80 backdrop-blur w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <span class="material-symbols-outlined text-sm">add</span>

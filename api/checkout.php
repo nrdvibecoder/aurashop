@@ -95,11 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
             exit;
 
         } catch (PDOException $e) {
-            $pdo->rollBack();
-            $checkoutError = "Une erreur est survenue lors de la commande. Veuillez réessayer.";
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            $checkoutError = __('checkout_error');
         }
     } else {
-        $checkoutError = "Veuillez remplir tous les champs obligatoires.";
+        $checkoutError = __('checkout_fields_error');
     }
 }
 

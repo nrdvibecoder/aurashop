@@ -15,7 +15,7 @@ if ($pdo) {
         $stmt->execute([$userId]);
         $user = $stmt->fetch();
     } catch (PDOException $e) {
-        $error = 'Erreur lors du chargement des données.';
+        $error = $language === 'fr' ? 'Impossible de charger vos informations de profil. Veuillez actualiser la page.' : 'Unable to load your profile information. Please refresh the page.';
     }
 }
 
@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user) {
                     $success = $language === 'fr' ? 'Profil mis à jour avec succès.' : 'Profile updated successfully.';
                 }
             } catch (PDOException $e) {
-                $error = 'Erreur lors de la mise à jour.';
+                $error = $language === 'fr' ? 'Une erreur est survenue lors de la mise à jour de votre profil. Veuillez réessayer.' : 'An error occurred while updating your profile. Please try again.';
             }
         } else {
-            $error = 'Tous les champs de profil sont requis.';
+            $error = $language === 'fr' ? 'Veuillez renseigner l\'ensemble des informations de votre profil.' : 'Please fill out all required profile details.';
         }
     } elseif ($action === 'change_password') {
         $current_pw = $_POST['current_password'] ?? '';
@@ -64,14 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user) {
                         $stmt->execute([$new_hash, $userId]);
                         $success = $language === 'fr' ? 'Mot de passe modifié avec succès.' : 'Password updated successfully.';
                     } catch (PDOException $e) {
-                        $error = 'Erreur lors de la modification.';
+                        $error = $language === 'fr' ? 'Une erreur est survenue lors de la modification de votre mot de passe. Veuillez réesssayer.' : 'An error occurred while updating your password. Please try again.';
                     }
                 }
             } else {
-                $error = $language === 'fr' ? 'Mot de passe actuel incorrect.' : 'Incorrect current password.';
+                $error = $language === 'fr' ? 'Le mot de passe actuel saisi est incorrect.' : 'The current password you entered is incorrect.';
             }
         } else {
-            $error = 'Tous les champs de mot de passe sont requis.';
+            $error = $language === 'fr' ? 'Veuillez renseigner tous les champs obligatoires du mot de passe.' : 'Please fill in all required password fields.';
         }
     } elseif ($action === 'delete_account') {
         try {
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user) {
             exit;
         } catch (PDOException $e) {
             $pdo->rollBack();
-            $error = 'Impossible de supprimer le compte. Contactez le support.';
+            $error = $language === 'fr' ? 'Impossible de procéder à la suppression du compte pour le moment. Veuillez contacter notre service client.' : 'Unable to complete your account deletion at this time. Please contact customer support.';
         }
     }
 }

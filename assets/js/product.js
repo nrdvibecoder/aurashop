@@ -77,14 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn.dataset.disabled === 'true') return;
         btn.addEventListener('click', () => {
             window.selectedSize = btn.dataset.sizeBtn;
-            sizeButtons.forEach(b => {
-                if (b.dataset.disabled !== 'true') {
-                    b.classList.remove('border-primary', 'text-primary', 'bg-primary/10');
-                    b.classList.add('border-outline-variant/30', 'text-on-surface');
-                }
-            });
-            btn.classList.remove('border-outline-variant/30', 'text-on-surface');
-            btn.classList.add('border-primary', 'text-primary', 'bg-primary/10');
+            // Deselect all
+            sizeButtons.forEach(b => b.setAttribute('data-selected', 'false'));
+            // Select clicked
+            btn.setAttribute('data-selected', 'true');
         });
     });
 
