@@ -13,7 +13,7 @@ $error = null;
 
 if ($pdo) {
     try {
-        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT p.*, c.name AS category FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.id = ?");
         $stmt->execute([$id]);
         $product = $stmt->fetch();
 

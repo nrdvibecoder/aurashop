@@ -132,7 +132,8 @@ function format_price($amount) {
 }
 
 function sanitize($v) {
-    return htmlspecialchars(strip_tags(trim($v)), ENT_QUOTES, 'UTF-8');
+    if ($v === null) return '';
+    return htmlspecialchars(strip_tags(trim((string)$v)), ENT_QUOTES, 'UTF-8');
 }
 
 function generate_order_number() {
