@@ -16,18 +16,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!zone) {
             if (deliveryFeeDisplay) deliveryFeeDisplay.textContent = '-- DA';
             if (deliveryFeeInput) deliveryFeeInput.value = 0;
+            const hDisplay = document.getElementById('home-fee-display');
+            const rDisplay = document.getElementById('relay-fee-display');
+            if (hDisplay) hDisplay.textContent = '— DA';
+            if (rDisplay) rDisplay.textContent = '— DA';
             return;
         }
 
+        const relayFee = parseInt(zone.relay_fee || 0);
+        const homeFee = relayFee + 300;
+
         const isRelay = deliveryMethodRelay && deliveryMethodRelay.checked;
-        const fee = isRelay ? parseInt(zone.relay_fee) : parseInt(zone.home_fee);
+        const fee = isRelay ? relayFee : homeFee;
         const days = zone.estimated_days;
 
         if (deliveryFeeDisplay) deliveryFeeDisplay.textContent = formatDA(fee);
         if (deliveryFeeInput) deliveryFeeInput.value = fee;
         if (deliveryDaysDisplay) deliveryDaysDisplay.textContent = `${days} jour${days > 1 ? 's' : ''} / day${days > 1 ? 's' : ''}`;
 
-        
+        const hDisplay = document.getElementById('home-fee-display');
+        const rDisplay = document.getElementById('relay-fee-display');
+        if (hDisplay) hDisplay.textContent = formatDA(homeFee);
+        if (rDisplay) rDisplay.textContent = formatDA(relayFee);
+
         updateOrderTotal();
     }
 

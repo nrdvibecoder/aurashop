@@ -2,6 +2,20 @@
 require_once 'config.php';
 $pageTitle = __('cart');
 
+$cartItemsForImages = get_cart();
+$productsDetails = [];
+if ($pdo && !empty($cartItemsForImages)) {
+    $ids = array_map(fn($item) => (int)$item['product_id'], $cartItemsForImages);
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+    try {
+        $stmtImg = $pdo->prepare("SELECT id, base64_image, image_url FROM products WHERE id IN ($placeholders)");
+        $stmtImg->execute($ids);
+        foreach ($stmtImg->fetchAll() as $row) {
+            $productsDetails[$row['id']] = $row;
+        }
+    } catch (PDOException $e) {}
+}
+
 $promoMsg = '';
 $promoDiscount = 0;
 $promoCode = '';
@@ -134,6 +148,7 @@ require_once 'header.php';
 
 <script src="assets/js/cart.js"></script>
 <script>
+window.productsImages = <?php echo json_encode($productsDetails, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 const PROMO_CODE = <?php echo json_encode($promoCode); ?>;
 const PROMO_TYPE = <?php echo json_encode($promoType); ?>;
 const PROMO_VALUE = <?php echo (int)($promoValue ?? 0); ?>;
@@ -170,7 +185,9 @@ function renderCart() {
     let html = '';
     items.forEach(item => {
         const subtotalItem = parseInt(item.price) * parseInt(item.quantity);
-        const imgHtml = item.image_url ? `<img src="${item.image_url}" alt="${item.name}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-4xl text-outline">image</span>`;
+        const dbProduct = window.productsImages[item.product_id] || {};
+        const imgUrl = dbProduct.base64_image || dbProduct.image_url || item.image_url || '';
+        const imgHtml = imgUrl ? `<img src="${imgUrl}" alt="${item.name}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-4xl text-outline">image</span>`;
         
         html += `
         <div class="flex gap-4 bg-surface-container rounded-xl p-5 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors">

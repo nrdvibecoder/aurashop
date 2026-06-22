@@ -17,15 +17,15 @@ if ($pdo) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = sanitize($_POST['name'] ?? '');
+    $name = db_clean($_POST['name'] ?? '');
     $category_id = (int)($_POST['category_id'] ?? 0);
-    $subcategory = sanitize($_POST['subcategory'] ?? '');
+    $subcategory = db_clean($_POST['subcategory'] ?? '');
     $price = (int)($_POST['price'] ?? 0);
     $discount = (int)($_POST['discount'] ?? 0);
     $stock = (int)($_POST['stock'] ?? 0);
     $is_featured = isset($_POST['is_featured']) ? 'true' : 'false';
     $is_new_arrival = isset($_POST['is_new_arrival']) ? 'true' : 'false';
-    $description = sanitize($_POST['description'] ?? '');
+    $description = db_clean($_POST['description'] ?? '');
 
     $colors = $_POST['colors'] ?? '[]';
     $sizes = $_POST['sizes'] ?? '[]';
@@ -65,9 +65,11 @@ require_once 'header.php';
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Ajouter un Produit</h1>
             <p class="font-body-md text-on-surface-variant">Créez une nouvelle pièce d'exception dans le catalogue.</p>
         </div>
-        <a href="admin.php" class="bg-surface-container border border-outline-variant/20 text-on-surface px-5 py-3 rounded-lg font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-2 hover:bg-surface-container/80 transition-colors">
-            <span class="material-symbols-outlined text-lg">arrow_back</span>
-            Retour Dashboard
+        <a href="admin.php" class="group flex items-center gap-2.5 px-6 py-3 bg-surface-container-high/50 hover:bg-primary/10 border border-outline-variant/20 hover:border-primary/40 text-on-surface hover:text-primary rounded-xl font-label-sm text-label-sm uppercase tracking-wider transition-all duration-300 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            <span>Retour Dashboard</span>
         </a>
     </div>
 

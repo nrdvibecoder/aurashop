@@ -5,10 +5,22 @@ $auth = requireAuth();
 $pageTitle = __('checkout');
 
 $deliveryZones = [];
+$productsDetails = [];
 if ($pdo) {
     try {
         $stmt = $pdo->query("SELECT * FROM delivery_zones ORDER BY wilaya_code ASC");
         $deliveryZones = $stmt->fetchAll();
+        
+        $cartItemsForImages = get_cart();
+        if (!empty($cartItemsForImages)) {
+            $ids = array_map(fn($item) => (int)$item['product_id'], $cartItemsForImages);
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $stmtImg = $pdo->prepare("SELECT id, base64_image, image_url FROM products WHERE id IN ($placeholders)");
+            $stmtImg->execute($ids);
+            foreach ($stmtImg->fetchAll() as $row) {
+                $productsDetails[$row['id']] = $row;
+            }
+        }
     } catch (PDOException $e) {}
 }
 
@@ -19,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         exit;
     }
 
-    $fullname = sanitize($_POST['fullname'] ?? '');
-    $phone = sanitize($_POST['phone'] ?? '');
-    $wilaya = sanitize($_POST['wilaya'] ?? '');
-    $commune = sanitize($_POST['commune'] ?? '');
-    $address = sanitize($_POST['address'] ?? '');
+    $fullname = db_clean($_POST['fullname'] ?? '');
+    $phone = db_clean($_POST['phone'] ?? '');
+    $wilaya = db_clean($_POST['wilaya'] ?? '');
+    $commune = db_clean($_POST['commune'] ?? '');
+    $address = db_clean($_POST['address'] ?? '');
     $delivery_method = in_array($_POST['delivery_method'] ?? '', ['home', 'relay']) ? $_POST['delivery_method'] : 'home';
     $delivery_fee = (int)($_POST['delivery_fee'] ?? 0);
-    $notes = sanitize($_POST['notes'] ?? '');
+    $notes = db_clean($_POST['notes'] ?? '');
 
     
     $storedPromo = isset($_COOKIE['aura_promo']) ? json_decode($_COOKIE['aura_promo'], true) : null;
@@ -223,8 +235,11 @@ require_once 'header.php';
                     <input type="hidden" id="delivery-fee-input" name="delivery_fee" value="0">
 
                     <div class="flex gap-4">
-                        <button type="button" data-step-back="1" class="border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm uppercase px-8 py-4 rounded-full tracking-widest hover:border-primary hover:text-primary transition-colors">
-                            ← Retour
+                        <button type="button" data-step-back="1" class="group flex items-center gap-3 px-8 py-4 bg-surface-container-high/40 hover:bg-primary/10 border border-outline-variant/30 hover:border-primary/50 text-on-surface-variant hover:text-primary rounded-full transition-all duration-300 font-label-sm text-label-sm uppercase tracking-widest active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            </svg>
+                            Retour
                         </button>
                         <button type="button" data-step-next="3" class="bg-primary text-on-primary font-label-sm text-label-sm uppercase px-10 py-4 rounded-full tracking-widest hover:bg-primary-fixed transition-colors">
                             Continuer →
@@ -251,8 +266,11 @@ require_once 'header.php';
                     <input type="hidden" name="place_order" value="1">
 
                     <div class="flex gap-4">
-                        <button type="button" data-step-back="2" class="border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm uppercase px-8 py-4 rounded-full tracking-widest hover:border-primary hover:text-primary transition-colors">
-                            ← Retour
+                        <button type="button" data-step-back="2" class="group flex items-center gap-3 px-8 py-4 bg-surface-container-high/40 hover:bg-primary/10 border border-outline-variant/30 hover:border-primary/50 text-on-surface-variant hover:text-primary rounded-full transition-all duration-300 font-label-sm text-label-sm uppercase tracking-widest active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            </svg>
+                            Retour
                         </button>
                         <button type="submit" class="flex-1 bg-primary text-on-primary font-label-sm text-label-sm uppercase py-5 rounded-full tracking-widest hover:bg-primary-fixed transition-all hover:scale-105 active:scale-95">
                             <?php echo __('place_order'); ?>
@@ -301,6 +319,7 @@ require_once 'header.php';
 
 <script>
 window.deliveryZones = <?php echo json_encode(array_values($deliveryZones), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
+window.productsImages = <?php echo json_encode($productsDetails, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 const PROMO_CODE = <?php echo json_encode($promoCode); ?>;
 const PROMO_TYPE = <?php echo json_encode($promoType); ?>;
 const PROMO_VALUE = <?php echo (int)$promoValue; ?>;
@@ -320,12 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let subtotal = 0;
     let html = '';
     items.forEach(item => {
-        const itemTotal = parseInt(item.price) * parseInt(item.quantity);
-        subtotal += itemTotal;
+        const dbProduct = window.productsImages[item.product_id] || {};
+        const imgUrl = dbProduct.base64_image || dbProduct.image_url || item.image_url || '';
+        const imgHtml = imgUrl ? `<img src="${imgUrl}" class="w-full h-full object-cover">` : '<span class="material-symbols-outlined text-2xl text-outline flex items-center justify-center h-full">image</span>';
+        
         html += `
         <div class="flex gap-3 items-center">
             <div class="w-14 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-lowest border border-outline-variant/10">
-                ${item.image_url ? `<img src="${item.image_url}" class="w-full h-full object-cover">` : '<span class="material-symbols-outlined text-2xl text-outline flex items-center justify-center h-full">image</span>'}
+                ${imgHtml}
             </div>
             <div class="flex-1 min-w-0">
                 <p class="font-body-md text-on-surface text-sm font-medium truncate">${item.name}</p>

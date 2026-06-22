@@ -24,7 +24,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
     <style>
@@ -119,12 +119,12 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
               },
               "fontFamily": {
                 "headline-md": ["Playfair Display"],
-                "body-md": ["Inter"],
+                "body-md": ["Plus Jakarta Sans"],
                 "headline-lg": ["Playfair Display"],
-                "body-lg": ["Inter"],
+                "body-lg": ["Plus Jakarta Sans"],
                 "display-lg": ["Playfair Display"],
                 "display-lg-mobile": ["Playfair Display"],
-                "label-sm": ["Inter"]
+                "label-sm": ["Plus Jakarta Sans"]
               },
               "fontSize": {
                 "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],

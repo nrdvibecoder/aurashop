@@ -19,8 +19,8 @@ $orderId = (int)$_GET['id'];
 if ($pdo) {
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
-        $newStatus = sanitize($_POST['status'] ?? '');
-        $note = sanitize($_POST['note'] ?? '');
+        $newStatus = db_clean($_POST['status'] ?? '');
+        $note = db_clean($_POST['note'] ?? '');
 
         if (in_array($newStatus, ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])) {
             try {
@@ -88,9 +88,11 @@ require_once 'header.php';
             <p class="font-body-md text-on-surface-variant">Créée le <?php echo date('d/m/Y H:i', strtotime($order['order_date'])); ?></p>
         </div>
         <div class="flex gap-3">
-            <a href="admin_orders.php" class="bg-surface-container border border-outline-variant/20 text-on-surface px-5 py-3 rounded-lg font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-2 hover:bg-surface-container/80 transition-colors">
-                <span class="material-symbols-outlined text-lg">arrow_back</span>
-                Toutes les Commandes
+            <a href="admin_orders.php" class="group flex items-center gap-2.5 px-6 py-3 bg-surface-container-high/50 hover:bg-primary/10 border border-outline-variant/20 hover:border-primary/40 text-on-surface hover:text-primary rounded-xl font-label-sm text-label-sm uppercase tracking-wider transition-all duration-300 active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                <span>Toutes les Commandes</span>
             </a>
         </div>
     </div>

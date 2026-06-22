@@ -136,6 +136,11 @@ function sanitize($v) {
     return htmlspecialchars(strip_tags(trim((string)$v)), ENT_QUOTES, 'UTF-8');
 }
 
+function db_clean($v) {
+    if ($v === null) return '';
+    return strip_tags(trim((string)$v));
+}
+
 function generate_order_number() {
     return 'ORD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
 }
