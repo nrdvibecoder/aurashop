@@ -49,7 +49,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Breadcrumb & Header -->
+    
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Administration</h1>
@@ -67,7 +67,7 @@ require_once 'header.php';
         </div>
     </div>
 
-    <!-- Admin Sub-Navigation tabs -->
+    
     <div class="flex flex-wrap gap-2 mb-10 border-b border-outline-variant/10 pb-4">
         <a href="admin.php" class="px-4 py-2.5 rounded-lg bg-surface-container text-primary font-bold font-label-sm text-label-sm uppercase tracking-wider">Tableau de bord</a>
         <a href="admin_orders.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Commandes</a>
@@ -84,9 +84,9 @@ require_once 'header.php';
     </div>
     <?php endif; ?>
 
-    <!-- KPI Grid -->
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <!-- Revenue KPI -->
+        
         <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-6 flex items-center justify-between shadow-sm hover:border-primary/25 transition-colors">
             <div>
                 <p class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75 mb-1">Revenu Total</p>
@@ -97,7 +97,7 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- Orders KPI -->
+        
         <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-6 flex items-center justify-between shadow-sm hover:border-primary/25 transition-colors">
             <div>
                 <p class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75 mb-1">Commandes</p>
@@ -108,7 +108,7 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- Products KPI -->
+        
         <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-6 flex items-center justify-between shadow-sm hover:border-primary/25 transition-colors">
             <div>
                 <p class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75 mb-1">Produits</p>
@@ -119,7 +119,7 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- Customers KPI -->
+        
         <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-6 flex items-center justify-between shadow-sm hover:border-primary/25 transition-colors">
             <div>
                 <p class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75 mb-1">Clients</p>
@@ -132,7 +132,7 @@ require_once 'header.php';
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Recent Orders (2 cols) -->
+        
         <div class="lg:col-span-2 bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
@@ -186,7 +186,7 @@ require_once 'header.php';
             <?php endif; ?>
         </div>
 
-        <!-- Low Stock Alerts (1 col) -->
+        
         <div class="lg:col-span-1 bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
             <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                 <span class="material-symbols-outlined text-error">warning</span>

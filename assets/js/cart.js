@@ -86,7 +86,6 @@ function showToast(message) {
     if (!container) return;
 
     const toast = document.createElement('div');
-    // Styling from Stitch tokens (forest/sage theme, surface-container with thin border and light on-surface text)
     toast.className = "flex items-center gap-3 bg-[#0f231c] border border-[#b2cdbc]/30 px-6 py-4 rounded-lg shadow-2xl pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300 text-on-surface font-label-sm text-label-sm uppercase tracking-wider";
     toast.innerHTML = `
         <span class="material-symbols-outlined text-[#b2cdbc]">check_circle</span>
@@ -95,12 +94,10 @@ function showToast(message) {
     
     container.appendChild(toast);
     
-    // Animate in
     setTimeout(() => {
         toast.classList.remove('translate-y-2', 'opacity-0');
     }, 10);
 
-    // Animate out
     setTimeout(() => {
         toast.classList.add('translate-y-2', 'opacity-0');
         setTimeout(() => {
@@ -109,7 +106,6 @@ function showToast(message) {
     }, 3500);
 }
 
-// Ensure the badge is updated on load
 document.addEventListener('DOMContentLoaded', () => {
     updateBadge();
 });

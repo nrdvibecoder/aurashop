@@ -6,7 +6,7 @@ require_once 'header.php';
 
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20 space-y-16">
     
-    <!-- Hero Header Section -->
+    
     <div class="text-center max-w-3xl mx-auto space-y-6">
         <span class="font-label-sm text-label-sm tracking-[0.3em] uppercase text-primary">AURA</span>
         <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg uppercase tracking-tight text-on-surface">
@@ -17,7 +17,7 @@ require_once 'header.php';
         </p>
     </div>
 
-    <!-- Image + Narrative block -->
+    
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center pt-8">
         <div class="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container border border-outline-variant/10">
             <img src="assets/aboutus.png" alt="AURA Design Philosophy" class="w-full h-full object-cover object-top brightness-90">
@@ -38,7 +38,7 @@ require_once 'header.php';
         </div>
     </div>
 
-    <!-- Core Values Section -->
+    
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-outline-variant/10">
         <div class="space-y-4">
             <span class="material-symbols-outlined text-primary text-4xl">architecture</span>

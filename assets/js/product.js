@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const qtyPlus = document.getElementById('qty-plus');
     const qtyMinus = document.getElementById('qty-minus');
 
-    // ── Color Swatch Selection ──
+    
     colorSwatches.forEach(swatch => {
         swatch.addEventListener('click', () => {
             const color = swatch.dataset.colorSwatch;
             window.selectedColor = color;
 
-            // Update active state
+            
             colorSwatches.forEach(s => {
                 s.classList.remove('ring-2', 'ring-offset-4', 'ring-offset-surface', 'ring-primary');
                 s.classList.add('ring-0');
@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
             swatch.classList.add('ring-2', 'ring-offset-4', 'ring-offset-surface', 'ring-primary');
             swatch.classList.remove('ring-0');
 
-            // Update color label
+            
             const colorLabel = document.getElementById('color-label');
             if (colorLabel) colorLabel.textContent = color;
 
-            // Swap gallery images
+            
             const images = window.colorImages[color];
             if (images && images.length > 0) {
                 if (mainImage) {
@@ -60,37 +60,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Pre-select first color on page load
+    
     const firstColorBtn = document.querySelector('[data-color-swatch]');
     if (firstColorBtn) {
         window.selectedColor = firstColorBtn.dataset.colorSwatch;
     }
 
-    // Set forced size if sizes are not defined (e.g., accessories)
+    
     const forcedSizeEl = document.getElementById('forced-size');
     if (forcedSizeEl) {
         window.selectedSize = forcedSizeEl.value;
     }
 
-    // ── Size Button Selection ──
+    
     sizeButtons.forEach(btn => {
         if (btn.dataset.disabled === 'true') return;
         btn.addEventListener('click', () => {
             window.selectedSize = btn.dataset.sizeBtn;
-            // Deselect all
+            
             sizeButtons.forEach(b => b.setAttribute('data-selected', 'false'));
-            // Select clicked
+            
             btn.setAttribute('data-selected', 'true');
         });
     });
 
-    // Pre-select first size on page load if size buttons exist
+    
     const firstSizeBtn = document.querySelector('[data-size-btn]:not([data-disabled="true"])');
     if (firstSizeBtn) {
         firstSizeBtn.click();
     }
 
-    // ── Quantity Stepper ──
+    
     if (qtyPlus) {
         qtyPlus.addEventListener('click', () => {
             const cur = parseInt(qtyInput.value);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Add to Cart ──
+    
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', () => {
             const hasColors = colorSwatches.length > 0;
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Thumbnail click on initial load ──
+    
     const firstThumb = thumbnailContainer ? thumbnailContainer.querySelector('button') : null;
     if (firstThumb) firstThumb.classList.add('border-primary');
 });

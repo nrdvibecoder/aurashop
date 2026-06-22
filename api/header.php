@@ -20,10 +20,10 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
     <title>AURA | <?php echo isset($pageTitle) ? sanitize($pageTitle) : 'Architectural Elegance'; ?></title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     
-    <!-- Tailwind CSS with Forms and Container Queries -->
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
-    <!-- Google Fonts -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
@@ -39,9 +39,9 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .gold-accent {
-            background-color: #b8ccb6; /* Sage green accent from Stitch */
+            background-color: #b8ccb6; 
         }
-        /* Page fade-in */
+        
         .page-fade-in {
             animation: fadeIn 0.6s ease-out forwards;
         }
@@ -140,32 +140,32 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
         }
     </script>
     <style>
-        /* Chrome, Safari, Edge, Opera: Hide input number spinners */
+        
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-        /* Firefox: Hide input number spinners */
+        
         input[type=number] {
             -moz-appearance: textfield;
         }
     </style>
 </head>
 <body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col overflow-x-hidden">
-    <!-- Top Navigation Bar -->
+    
     <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 h-20 transition-all duration-300">
         <div class="flex justify-between items-center px-6 lg:px-margin-desktop h-full max-w-container-max mx-auto relative">
 
-            <!-- ===== MOBILE LAYOUT: AURA far-left, actions far-right ===== -->
-            <!-- ===== DESKTOP LAYOUT: nav-links left, AURA center, actions right ===== -->
+            
+            
 
-            <!-- Left slot -->
+            
             <div class="flex items-center gap-6">
-                <!-- Mobile: AURA title (extreme left) -->
+                
                 <a href="index.php" class="lg:hidden font-headline-lg text-xl tracking-[0.25em] text-on-surface hover:text-primary transition-colors">AURA</a>
 
-                <!-- Desktop: Category dropdown + nav links -->
+                
                 <div class="hidden lg:flex items-center gap-6">
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase tracking-widest py-2">
@@ -185,26 +185,26 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                             </div>
             </div>
 
-            <!-- Center: AURA logo — Desktop only -->
+            
             <div class="hidden lg:flex absolute left-1/2 -translate-x-1/2">
                 <a href="index.php" class="font-headline-lg text-headline-lg tracking-widest text-on-surface hover:text-primary transition-colors">AURA</a>
             </div>
 
-            <!-- Right slot: actions -->
+            
             <div class="flex items-center gap-3 lg:gap-6">
-                <!-- Search (desktop) -->
+                
                 <form action="shop.php" method="GET" class="hidden lg:flex items-center relative">
                     <input type="text" name="q" placeholder="<?php echo __('search'); ?>..." class="bg-surface-container border border-outline-variant/20 rounded-full py-1.5 pl-4 pr-10 text-label-sm text-on-surface placeholder:text-outline/40 w-44 focus:w-60 transition-all duration-300">
                     <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant hover:text-primary text-xl">search</button>
                 </form>
 
-                <!-- Search icon (mobile) -->
+                
                 <a href="shop.php" class="lg:hidden material-symbols-outlined text-[22px] text-on-surface-variant hover:text-primary transition-colors">search</a>
 
-                <!-- Language toggle -->
+                
                 <a href="set_lang.php?lang=<?php echo $toggleLang; ?>" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest"><?php echo $toggleLangLabel; ?></a>
 
-                <!-- Cart -->
+                
                 <a href="cart.php" class="relative group">
                     <span class="material-symbols-outlined text-[22px] text-on-surface-variant group-hover:text-primary transition-colors">shopping_bag</span>
                     <span id="cart-badge" class="<?php echo ($cartCount > 0) ? '' : 'hidden'; ?> absolute -top-1.5 -right-1.5 min-w-[16px] h-4 bg-primary text-on-primary text-[9px] font-bold flex items-center justify-center rounded-full border border-surface px-0.5">
@@ -212,7 +212,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                     </span>
                 </a>
 
-                <!-- Account dropdown (desktop only) -->
+                
                 <?php if ($auth): ?>
                     <div class="relative group hidden lg:block">
                         <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors py-2">
@@ -232,7 +232,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                     <a href="login.php" class="hidden lg:inline material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">account_circle</a>
                 <?php endif; ?>
 
-                <!-- Hamburger (mobile only) -->
+                
                <button
                     id="mobile-menu-trigger"
                     class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-on-surface-variant hover:text-primary transition-colors focus:outline-none"
@@ -246,20 +246,19 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
         </div>
     </nav>
 
-
-    <!-- Mobile Navigation Drawer -->
+    
     <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden">
         <div id="mobile-drawer-content" class="w-80 h-full bg-surface-container-lowest border-l border-outline-variant/10 flex flex-col justify-between p-8 ml-auto translate-x-full transition-transform duration-300 ease-out">
             <div>
-                <!-- Header of Drawer -->
+                
                 <div class="flex justify-between items-center mb-8">
                     <span class="font-headline-lg text-headline-lg tracking-widest text-primary">AURA</span>
                     <button id="mobile-drawer-close" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors focus:outline-none">close</button>
                 </div>
 
-                <!-- Navigation List -->
+                
                 <nav class="space-y-6">
-                    <!-- Boutique Section -->
+                    
                     <div class="space-y-2">
                         <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1"><?php echo __('shop'); ?></span>
                         <a href="shop.php?category=Women" class="block font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors py-1 pl-2 border-l border-primary/20"><?php echo __('women'); ?></a>
@@ -269,7 +268,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                         <a href="shop.php" class="block font-body-md text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/20"><?php echo __('all'); ?></a>
                     </div>
 
-                    <!-- Compte Section -->
+                    
                     <div class="space-y-2 pt-4">
                         <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1"><?php echo __('account'); ?></span>
                         <?php if ($auth): ?>
@@ -284,7 +283,7 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                         <?php endif; ?>
                     </div>
 
-                    <!-- Infos Section -->
+                    
                     <div class="space-y-2 pt-4">
                         <span class="block font-label-sm text-[10px] text-outline uppercase tracking-[0.2em] mb-1">Information</span>
                         <a href="about.php" class="block font-body-md text-on-surface-variant hover:text-primary transition-colors"><?php echo __('about'); ?></a>
@@ -293,14 +292,14 @@ $toggleLangLabel = ($currentLang === 'en') ? 'FR' : 'EN';
                 </nav>
             </div>
 
-            <!-- Footer of Drawer -->
+            
             <div class="border-t border-outline-variant/10 pt-6">
                 <p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest opacity-60">© 2026 AURA Algérie</p>
             </div>
         </div>
     </div>
 
-    <!-- Drawer toggling script -->
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const trigger = document.getElementById('mobile-menu-trigger');

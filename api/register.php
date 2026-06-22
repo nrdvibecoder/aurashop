@@ -58,11 +58,11 @@ require_once 'header.php';
 ?>
 
 <div class="h-screen flex items-center justify-center px-margin-mobile relative overflow-hidden bg-black -mt-24">
-    <!-- Premium Architectural Blurred Backdrop -->
+    
     <div class="absolute inset-0 bg-cover bg-center scale-105 filter blur-2xl opacity-40 brightness-50" style="background-image: url('assets/hero3.png');"></div>
 
     <div class="w-full max-w-md relative z-10">
-        <!-- Glassmorphism Card -->
+        
         <div class="backdrop-blur-xl bg-surface/50 border border-outline-variant/20 rounded-2xl p-8 md:p-10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
             <div class="text-center mb-8">
                 <a href="index.php" class="font-headline-lg text-headline-lg text-primary tracking-widest block mb-4">AURA</a>

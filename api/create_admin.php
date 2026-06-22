@@ -4,7 +4,7 @@ require_once 'config.php';
 
 $adminFullname = 'Aura Administrator';
 $adminEmail = 'admin@aurashop.com';
-$adminPassword = 'AuraAdmin2026!'; 
+$adminPassword = ''; 
 
 if (!$pdo) {
     die("Database connection failed. Check your environment settings.");

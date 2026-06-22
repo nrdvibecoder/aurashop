@@ -72,7 +72,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Header -->
+    
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Gestion des Clients</h1>
@@ -84,7 +84,7 @@ require_once 'header.php';
         </a>
     </div>
 
-    <!-- Admin Sub-Navigation tabs -->
+    
     <div class="flex flex-wrap gap-2 mb-10 border-b border-outline-variant/10 pb-4">
         <a href="admin.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Tableau de bord</a>
         <a href="admin_orders.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Commandes</a>
@@ -108,7 +108,7 @@ require_once 'header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Search Bar -->
+    
     <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-6 mb-8 shadow-sm">
         <form method="GET" class="flex gap-4">
             <div class="flex-1 flex items-center bg-surface border border-outline-variant/20 rounded-lg px-4 py-2.5">
@@ -130,7 +130,7 @@ require_once 'header.php';
         </form>
     </div>
 
-    <!-- Customers Table -->
+    
     <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
         <?php if (empty($customers)): ?>
         <p class="font-body-md text-on-surface-variant text-center py-10">Aucun client trouvé.</p>
@@ -180,7 +180,7 @@ require_once 'header.php';
             </table>
         </div>
 
-        <!-- Pagination -->
+        
         <?php if ($totalPages > 1): ?>
         <div class="flex justify-center items-center gap-2 mt-8">
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>

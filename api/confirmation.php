@@ -40,7 +40,7 @@ require_once 'header.php';
 
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 pb-24">
     
-    <!-- Success Header -->
+    
     <div class="text-center mb-16">
         <div class="w-20 h-20 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto mb-6">
             <span class="material-symbols-outlined text-5xl text-primary">check_circle</span>
@@ -58,9 +58,9 @@ require_once 'header.php';
     <?php else: ?>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <!-- Left: Items + Shipping -->
+        
         <div class="lg:col-span-8 space-y-8">
-            <!-- Order Items -->
+            
             <div class="bg-surface-container rounded-2xl border border-outline-variant/10 p-8">
                 <h2 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-6">Articles commandés</h2>
                 <div class="space-y-6">
@@ -88,7 +88,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Shipping Info -->
+            
             <div class="bg-surface-container rounded-2xl border border-outline-variant/10 p-8">
                 <h2 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-6">Adresse de livraison</h2>
                 <div class="space-y-2 font-body-md text-on-surface">
@@ -102,7 +102,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Status History -->
+            
             <?php if (!empty($statusHistory)): ?>
             <div class="bg-surface-container rounded-2xl border border-outline-variant/10 p-8">
                 <h2 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-6">Historique du statut</h2>
@@ -127,7 +127,7 @@ require_once 'header.php';
             <?php endif; ?>
         </div>
 
-        <!-- Right: Summary -->
+        
         <aside class="lg:col-span-4">
             <div class="bg-surface-container-high rounded-2xl border border-outline-variant/10 p-8 space-y-6">
                 <h2 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Récapitulatif</h2>

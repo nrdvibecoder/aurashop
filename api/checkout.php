@@ -122,12 +122,12 @@ require_once 'header.php';
     <?php endif; ?>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        <!-- ═══ CHECKOUT FORM ═══ -->
+        
         <div class="lg:col-span-8 space-y-12">
             <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg uppercase tracking-tight"><?php echo __('checkout'); ?></h1>
 
             <form method="POST" id="checkout-form" class="space-y-12">
-                <!-- STEP 1: Shipping -->
+                
                 <div data-step="1" class="space-y-8">
                     <div class="flex items-center gap-4">
                         <span data-step-indicator="1" class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm">1</span>
@@ -184,7 +184,7 @@ require_once 'header.php';
                     </button>
                 </div>
 
-                <!-- STEP 2: Delivery Method -->
+                
                 <div data-step="2" class="space-y-8" style="display:none">
                     <div class="flex items-center gap-4">
                         <span data-step-indicator="2" class="w-8 h-8 rounded-full border border-outline-variant/40 text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">2</span>
@@ -232,7 +232,7 @@ require_once 'header.php';
                     </div>
                 </div>
 
-                <!-- STEP 3: Payment & Summary -->
+                
                 <div data-step="3" class="space-y-8" style="display:none">
                     <div class="flex items-center gap-4">
                         <span data-step-indicator="3" class="w-8 h-8 rounded-full border border-outline-variant/40 text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">3</span>
@@ -262,12 +262,12 @@ require_once 'header.php';
             </form>
         </div>
 
-        <!-- ═══ ORDER SUMMARY ═══ -->
+        
         <aside class="lg:col-span-4 lg:sticky lg:top-28">
             <div class="bg-surface-container-high rounded-2xl p-8 border border-outline-variant/10 space-y-8">
                 <h2 class="font-headline-md text-headline-md uppercase tracking-widest border-b border-outline-variant/20 pb-4">Votre Commande</h2>
                 <div id="checkout-cart-items" class="space-y-4">
-                    <!-- Rendered by JS -->
+                    
                 </div>
                 <div class="h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
                 <div class="space-y-3 font-body-md">
@@ -307,7 +307,7 @@ const PROMO_VALUE = <?php echo (int)$promoValue; ?>;
 </script>
 <script src="assets/js/cart.js"></script>
 <script>
-// Render cart items in the sidebar
+
 document.addEventListener('DOMContentLoaded', () => {
     const items = readCart();
     const container = document.getElementById('checkout-cart-items');
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subtotalEl.dataset.amount = subtotal;
     }
 
-    // Apply promo for display
+    
     let discount = 0;
     if (PROMO_CODE) {
         if (PROMO_TYPE === 'percentage') discount = Math.floor(subtotal * PROMO_VALUE / 100);
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalEl = document.getElementById('summary-total');
     if (totalEl) { totalEl.textContent = formatDA(total); totalEl.dataset.amount = total; }
 
-    // Update hidden final total
+    
     const finalInput = document.getElementById('final-total-input');
     if (finalInput) finalInput.value = total;
 });

@@ -126,7 +126,7 @@ require_once 'header.php';
     <?php endif; ?>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <!-- Sidebar Navigation -->
+        
         <div class="lg:col-span-1 flex flex-col gap-2">
             <button onclick="switchTab('profile-tab')" id="profile-tab-btn" class="tab-btn w-full text-left px-5 py-4 rounded-lg font-label-sm text-label-sm uppercase tracking-wider transition-all duration-200 flex items-center gap-3 bg-surface-container text-primary font-bold">
                 <span class="material-symbols-outlined">person</span>
@@ -142,11 +142,11 @@ require_once 'header.php';
             </button>
         </div>
 
-        <!-- Content Area -->
+        
         <div class="lg:col-span-3">
-            <!-- Profile Tab -->
+            
             <div id="profile-tab" class="tab-content space-y-8">
-                <!-- Info Section -->
+                
                 <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                     <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary">badge</span>
@@ -174,7 +174,7 @@ require_once 'header.php';
                     </form>
                 </div>
 
-                <!-- Password Section -->
+                
                 <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                     <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary">lock</span>
@@ -208,7 +208,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Orders Tab -->
+            
             <div id="orders-tab" class="tab-content hidden space-y-6">
                 <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                     <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
@@ -265,7 +265,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Danger Zone Tab -->
+            
             <div id="danger-tab" class="tab-content hidden">
                 <div class="bg-surface-container border border-error/20 rounded-xl p-8 shadow-sm">
                     <h2 class="font-headline-md text-headline-md text-error mb-4 flex items-center gap-2">
@@ -289,19 +289,19 @@ require_once 'header.php';
 
 <script>
 function switchTab(tabId) {
-    // Hide all tab contents
+    
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.add('hidden');
     });
-    // Remove active class from buttons
+    
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-surface-container', 'text-primary', 'font-bold');
         btn.classList.add('text-on-surface-variant');
     });
 
-    // Show active tab
+    
     document.getElementById(tabId).classList.remove('hidden');
-    // Set button active
+    
     const btn = document.getElementById(tabId + '-btn');
     btn.classList.add('bg-surface-container', 'text-primary', 'font-bold');
     btn.classList.remove('text-on-surface-variant');

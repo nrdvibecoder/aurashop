@@ -30,7 +30,6 @@ $categories = [
 ];
 ?>
 
-<!-- ============ HERO CAROUSEL ============ -->
 <section class="relative h-[70vh] max-h-[650px] w-full overflow-hidden -mt-24" id="hero">
     <div class="carousel-inner w-full h-full relative">
         <?php foreach ($heroSlides as $idx => $slide): ?>
@@ -61,7 +60,7 @@ $categories = [
         <?php endforeach; ?>
     </div>
 
-    <!-- Dot controls -->
+    
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         <?php foreach ($heroSlides as $idx => $slide): ?>
         <button class="carousel-dot w-2 h-2 rounded-full transition-all duration-300 <?php echo $idx === 0 ? 'bg-primary w-8' : 'bg-primary/30 hover:bg-primary/60'; ?>" 
@@ -69,17 +68,15 @@ $categories = [
         <?php endforeach; ?>
     </div>
 
-    <!-- Scroll indicator -->
+    
     <div class="absolute bottom-10 right-12 flex flex-col items-center gap-2 opacity-50">
         <span class="font-label-sm text-label-sm tracking-[0.3em] uppercase text-on-surface-variant" style="writing-mode: vertical-rl;">Scroll</span>
         <div class="w-[1px] h-12 bg-primary"></div>
     </div>
 </section>
 
-<!-- Divider -->
 <div class="h-px w-full max-w-container-max mx-auto bg-gradient-to-r from-transparent via-primary/20 to-transparent my-0"></div>
 
-<!-- ============ NEW ARRIVALS ============ -->
 <section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop" id="new-arrivals">
     <div class="flex justify-between items-end mb-16">
         <div>
@@ -90,7 +87,7 @@ $categories = [
     </div>
     
     <?php if (empty($newArrivals)): ?>
-    <!-- Skeleton loaders -->
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
         <?php for ($i = 0; $i < 4; $i++): ?>
         <div class="animate-pulse">
@@ -142,10 +139,8 @@ $categories = [
     <?php endif; ?>
 </section>
 
-<!-- Divider -->
 <div class="h-px w-full max-w-container-max mx-auto bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
-<!-- ============ COLLECTIONS GRID ============ -->
 <section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop" id="collections">
     <div class="mb-12">
         <span class="font-label-sm text-label-sm tracking-[0.3em] uppercase text-on-surface-variant"><?php echo __('categories'); ?></span>
@@ -168,10 +163,8 @@ $categories = [
     </div>
 </section>
 
-<!-- Divider -->
 <div class="h-px w-full max-w-container-max mx-auto bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
-<!-- ============ FEATURED PIECES ============ -->
 <?php if (!empty($featuredProducts)): ?>
 <section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
     <div class="flex justify-between items-end mb-16">
@@ -218,7 +211,6 @@ $categories = [
 </section>
 <?php endif; ?>
 
-<!-- ============ NEWSLETTER SECTION ============ -->
 <section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
     <div class="relative bg-surface-container rounded-xl overflow-hidden py-24 px-8 text-center border border-primary/10">
         <div class="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
@@ -250,7 +242,7 @@ $categories = [
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Hero Carousel
+    
     const slides = document.querySelectorAll('.carousel-slide');
     const dots = document.querySelectorAll('.carousel-dot');
     let current = 0;
@@ -267,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dots[current].classList.remove('bg-primary/30', 'w-2');
         dots[current].classList.add('bg-primary', 'w-8');
 
-        // Animate text in the new slide
+        
         const animEls = slides[current].querySelectorAll('[data-hero-animate]');
         animEls.forEach(el => {
             el.classList.remove('opacity-0', 'translate-y-4');
@@ -277,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dots.forEach((dot, idx) => dot.addEventListener('click', () => goToSlide(idx)));
     
-    // Animate first slide on load
+    
     setTimeout(() => {
         const firstAnimEls = slides[0].querySelectorAll('[data-hero-animate]');
         firstAnimEls.forEach(el => {
@@ -286,12 +278,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
-    // Auto-play
+    
     setInterval(() => {
         goToSlide((current + 1) % slides.length);
     }, 5000);
 
-    // Intersection Observer for fade-in sections
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

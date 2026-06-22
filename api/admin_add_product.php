@@ -59,7 +59,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Header -->
+    
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Ajouter un Produit</h1>
@@ -86,15 +86,15 @@ require_once 'header.php';
     <?php endif; ?>
 
     <form method="POST" id="product-form" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Hidden elements populated by JS -->
+        
         <input type="hidden" id="colors-input" name="colors">
         <input type="hidden" id="color-images-input" name="color_images">
         <input type="hidden" id="sizes-input" name="sizes">
         <input type="hidden" id="base64-image-input" name="base64_image">
 
-        <!-- Form fields (2 cols) -->
+        
         <div class="lg:col-span-2 space-y-8">
-            <!-- Basic Details -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-6">
                 <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">info</span>
@@ -136,7 +136,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Colors Swatches and Color Images (THE MOST IMPORTANT THING) -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-6">
                 <div class="flex justify-between items-center">
                     <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
@@ -149,14 +149,14 @@ require_once 'header.php';
                     </button>
                 </div>
 
-                <!-- Color blocks container (Dynamically managed by assets/js/admin-product.js) -->
+                
                 <div id="color-blocks" class="space-y-6"></div>
             </div>
         </div>
 
-        <!-- Sidebar options (1 col) -->
+        
         <div class="space-y-8">
-            <!-- Inventory & Price -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-6">
                 <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">sell</span>
@@ -185,7 +185,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Image Principale & Sizes -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-6">
                 <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">image</span>
@@ -198,56 +198,7 @@ require_once 'header.php';
                         <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2 block">cloud_upload</span>
                         <p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Choisir Image Principale</p>
                     </div>
-                    <input type="file" id="main-image-file" accept="image/*" class="hidden" onchange="handleMainImage(event)">
-                    
-                    <!-- Preview -->
-                    <div id="main-image-preview-container" class="hidden relative mt-4 aspect-[3/4] rounded-lg overflow-hidden border border-outline-variant/20 bg-surface">
-                        <img id="main-image-preview" src="" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-                <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2 pt-4 border-t border-outline-variant/10">
-                    <span class="material-symbols-outlined text-primary">aspect_ratio</span>
-                    Tailles Disponibles
-                </h2>
-                <div class="grid grid-cols-3 gap-3">
-                    <?php
-                    $availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'TU'];
-                    foreach ($availableSizes as $sz):
-                    ?>
-                    <label class="flex items-center justify-center border border-outline-variant/20 rounded-lg p-3 hover:bg-surface-container-high cursor-pointer transition-colors size-label">
-                        <input type="checkbox" name="size[]" value="<?php echo $sz; ?>" class="sr-only peer">
-                        <span class="font-label-sm text-label-sm text-on-surface peer-checked:text-primary peer-checked:font-bold"><?php echo $sz; ?></span>
-                    </label>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-
-            <!-- Visibility Settings -->
-            <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-4">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="is_featured" class="w-5 h-5 rounded border-outline-variant/30 text-primary focus:ring-0 bg-surface">
-                    <span class="font-body-md text-on-surface">Mettre en Vedette (Featured)</span>
-                </label>
-
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="is_new_arrival" checked class="w-5 h-5 rounded border-outline-variant/30 text-primary focus:ring-0 bg-surface">
-                    <span class="font-body-md text-on-surface">Nouvelle Arrivée (New Arrival)</span>
-                </label>
-
-                <button type="submit" class="w-full bg-primary text-on-primary py-4 font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary-fixed transition-all duration-300 rounded-lg hover:scale-[1.02] active:scale-95 mt-6">
-                    Enregistrer le Produit
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<!-- Load scripts -->
-<script src="assets/js/admin-product.js"></script>
-
-<style>
-/* CSS Peer Styling for Size Buttons */
+                    <input type="file" id="main-image-file" accept="image
 .size-label:has(input[type="checkbox"]:checked) {
     border-color: var(--md-sys-color-primary, #b2cdbc) !important;
     background-color: rgba(178, 205, 188, 0.1) !important;

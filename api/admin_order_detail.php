@@ -81,7 +81,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Header -->
+    
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Commande #<?php echo sanitize($order['order_number']); ?></h1>
@@ -110,9 +110,9 @@ require_once 'header.php';
     <?php endif; ?>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Main Details (2 cols) -->
+        
         <div class="lg:col-span-2 space-y-8">
-            <!-- Order Items Card -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                 <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">shopping_bag</span>
@@ -148,7 +148,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Shipping Information -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
@@ -194,7 +194,7 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Notes -->
+            
             <?php if ($order['notes']): ?>
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                 <h3 class="font-label-sm text-label-sm uppercase text-on-surface-variant opacity-75 mb-3">Notes de commande client</h3>
@@ -203,9 +203,9 @@ require_once 'header.php';
             <?php endif; ?>
         </div>
 
-        <!-- Management Panel & History (1 col) -->
+        
         <div class="space-y-8">
-            <!-- Update Status Form -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm space-y-6">
                 <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">edit_square</span>
@@ -239,7 +239,7 @@ require_once 'header.php';
                 </form>
             </div>
 
-            <!-- Status Timeline History -->
+            
             <div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
                 <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">history</span>
@@ -252,7 +252,7 @@ require_once 'header.php';
                 <div class="relative pl-6 border-l-2 border-outline-variant/30 space-y-6">
                     <?php foreach ($history as $hist): ?>
                     <div class="relative">
-                        <!-- Dot -->
+                        
                         <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-primary border-4 border-surface-container"></span>
                         
                         <div>

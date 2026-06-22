@@ -66,7 +66,7 @@ require_once 'header.php';
 </style>
 
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 pb-16">
-    <!-- Breadcrumb -->
+    
     <nav class="flex gap-2 font-label-sm text-label-sm text-on-surface-variant mb-10 flex-wrap">
         <a href="index.php" class="hover:text-primary transition-colors"><?php echo __('home'); ?></a>
         <span>/</span>
@@ -75,12 +75,12 @@ require_once 'header.php';
         <span class="text-on-surface"><?php echo sanitize($product['name']); ?></span>
     </nav>
 
-    <!-- Product Layout -->
+    
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
         
-        <!-- ═══ LEFT: Gallery ═══ -->
+        
         <div class="lg:col-span-7 space-y-4">
-            <!-- Main Image -->
+            
             <div class="aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low relative group cursor-crosshair">
                 <img id="main-product-image" 
                      src="<?php echo sanitize(!empty($firstColorImgs) ? $firstColorImgs[0] : $mainImgSrc); ?>" 
@@ -93,7 +93,7 @@ require_once 'header.php';
                 <?php endif; ?>
             </div>
 
-            <!-- Thumbnails -->
+            
             <div id="thumbnail-container" class="grid grid-cols-4 gap-3">
                 <?php 
                 $galleryImgs = !empty($firstColorImgs) ? $firstColorImgs : [$mainImgSrc];
@@ -106,10 +106,10 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- ═══ RIGHT: Info Column ═══ -->
+        
         <div class="lg:col-span-5 flex flex-col gap-8">
             
-            <!-- Header -->
+            
             <div>
                 <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary block mb-2"><?php echo sanitize($product['category']); ?><?php echo $product['subcategory'] ? ' / ' . sanitize($product['subcategory']) : ''; ?></span>
                 <h1 class="font-headline-lg text-headline-lg text-on-surface mb-4"><?php echo sanitize($product['name']); ?></h1>
@@ -122,10 +122,10 @@ require_once 'header.php';
                 </div>
             </div>
 
-            <!-- Divider -->
+            
             <div class="h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
 
-            <!-- Color Swatches -->
+            
             <?php if (!empty($colors)): ?>
             <div>
                 <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block mb-3">
@@ -143,7 +143,7 @@ require_once 'header.php';
             </div>
             <?php endif; ?>
 
-            <!-- Size Selector -->
+            
             <?php if (!empty($sizes)): ?>
             <div>
                 <div class="flex justify-between items-center mb-3">
@@ -163,7 +163,7 @@ require_once 'header.php';
             <input type="hidden" id="forced-size" value="Unique">
             <?php endif; ?>
 
-            <!-- Quantity + Add to Cart -->
+            
             <div class="space-y-4">
                 <div class="flex items-center gap-4">
                     <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant"><?php echo __('quantity'); ?></span>
@@ -195,7 +195,7 @@ require_once 'header.php';
                 </a>
             </div>
 
-            <!-- Description Accordion -->
+            
             <div class="space-y-4">
                 <?php if ($product['description']): ?>
                 <details class="group border-b border-outline-variant/10 pb-4" open>
@@ -221,7 +221,7 @@ require_once 'header.php';
         </div>
     </section>
 
-    <!-- Related Products -->
+    
     <?php if (!empty($relatedProducts)): ?>
     <section class="mt-24">
         <div class="flex justify-between items-end mb-10">
@@ -254,7 +254,6 @@ require_once 'header.php';
     <?php endif; ?>
 </div>
 
-<!-- Embed JSON for JS -->
 <script>
 window.productColors = <?php echo json_encode($colors, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 window.colorImages = <?php echo json_encode($colorImages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;

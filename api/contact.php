@@ -23,7 +23,7 @@ require_once 'header.php';
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
-        <!-- Left Side: contact info -->
+        
         <div class="lg:col-span-5 space-y-8">
             <div class="space-y-4">
                 <span class="font-label-sm text-label-sm tracking-[0.3em] uppercase text-primary"><?php echo __('contact_title'); ?></span>
@@ -59,7 +59,7 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- Right Side: Contact Form -->
+        
         <div class="lg:col-span-7 bg-surface-container border border-outline-variant/10 rounded-2xl p-8 md:p-10">
             <?php if ($successMsg): ?>
                 <div class="bg-primary/10 text-primary border border-primary/20 px-6 py-4 rounded-xl mb-6 font-body-md flex items-center gap-3">

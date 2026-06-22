@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (deliveryFeeInput) deliveryFeeInput.value = fee;
         if (deliveryDaysDisplay) deliveryDaysDisplay.textContent = `${days} jour${days > 1 ? 's' : ''} / day${days > 1 ? 's' : ''}`;
 
-        // Update order summary total
+        
         updateOrderTotal();
     }
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalEl) totalEl.textContent = formatDA(Math.max(0, total));
         totalEl.dataset.amount = Math.max(0, total);
 
-        // Update hidden form input
+        
         const totalInput = document.getElementById('final-total-input');
         if (totalInput) totalInput.value = Math.max(0, total);
     }
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deliveryMethodRelay.addEventListener('change', updateDeliveryFee);
     }
 
-    // ── Multi-step form navigation ──
+    
     const steps = document.querySelectorAll('[data-step]');
     const stepIndicators = document.querySelectorAll('[data-step-indicator]');
     let currentStep = 1;
@@ -104,10 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize first step
+    
     if (steps.length > 0) showStep(1);
 
-    // ── Step 1 validation ──
+    
     function validateStep1() {
         const fullname = document.getElementById('input-fullname');
         const phone = document.getElementById('input-phone');
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Algerian phone validation
+        
         if (phone && phone.value && !/^(05|06|07)\d{8}$/.test(phone.value.replace(/\s/g, ''))) {
             phone.classList.add('border-error');
             showToast('Format téléphone invalide (ex: 0612345678)');
@@ -136,6 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return valid;
     }
 
-    // Initialize
+    
     updateDeliveryFee();
 });

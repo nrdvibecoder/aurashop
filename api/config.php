@@ -3,39 +3,37 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+$dbUrl = getenv('DATABASE_URL') ?: ($_ENV['DATABASE_URL'] ?? null);
+$pdo = null;
+$pdoError = null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) {
     $email = filter_var($_POST['newsletter_email'], FILTER_SANITIZE_EMAIL);
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         try {
+            if (!$dbUrl) {
+                throw new Exception("Database configuration URL missing.");
+            }
+            $parsedUrlTemp = parse_url($dbUrl);
+            $hostTemp = $parsedUrlTemp['host'] ?? '';
+            $portTemp = $parsedUrlTemp['port'] ?? '5432';
+            $userTemp = rawurldecode($parsedUrlTemp['user'] ?? '');
+            $passTemp = rawurldecode($parsedUrlTemp['pass'] ?? '');
+            $dbnameTemp = ltrim($parsedUrlTemp['path'] ?? '', '/');
+            $dsnTemp = "pgsql:host=$hostTemp;port=$portTemp;dbname=$dbnameTemp;sslmode=require";
+
+            $pdo = new PDO($dsnTemp, $userTemp, $passTemp, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ]);
             
-            if (!$pdo) {
-                $dbUrlTemp = getenv('DATABASE_URL') ?: ($_ENV['DATABASE_URL'] ?? null);
-                if ($dbUrlTemp) {
-                    $parsedUrlTemp = parse_url($dbUrlTemp);
-                    $hostTemp = $parsedUrlTemp['host'] ?? 'localhost';
-                    $portTemp = $parsedUrlTemp['port'] ?? '5432';
-                    $userTemp = rawurldecode($parsedUrlTemp['user'] ?? '');
-                    $passTemp = rawurldecode($parsedUrlTemp['pass'] ?? '');
-                    $dbnameTemp = ltrim($parsedUrlTemp['path'] ?? '', '/');
-                    $dsnTemp = "pgsql:host=$hostTemp;port=$portTemp;dbname=$dbnameTemp;sslmode=require";
-                } else {
-                    $dsnTemp = "pgsql:host=localhost;port=5432;dbname=aurashop";
-                    $userTemp = "postgres";
-                    $passTemp = "";
-                }
-                $pdo = new PDO($dsnTemp, $userTemp, $passTemp, [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                ]);
-            }
-            if ($pdo) {
-                $stmt = $pdo->prepare("INSERT INTO newsletter (email) VALUES (?) ON CONFLICT (email) DO NOTHING");
-                $stmt->execute([$email]);
-            }
+            $stmt = $pdo->prepare("INSERT INTO newsletter (email) VALUES (?) ON CONFLICT (email) DO NOTHING");
+            $stmt->execute([$email]);
+
             $langCookie = $_COOKIE['lang'] ?? 'fr';
             $_SESSION['newsletter_msg'] = ($langCookie === 'en') ? "Thank you for subscribing!" : "Merci pour votre inscription !";
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $_SESSION['newsletter_msg'] = "Erreur: " . $e->getMessage();
         }
     } else {
@@ -48,26 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
     exit;
 }
 
-$dbUrl = getenv('DATABASE_URL') ?: ($_ENV['DATABASE_URL'] ?? null);
-$pdo = null;
-$pdoError = null;
-
 try {
-    if ($dbUrl) {
-        $parsedUrl = parse_url($dbUrl);
-        $host = $parsedUrl['host'] ?? 'localhost';
-        $port = $parsedUrl['port'] ?? '5432';
-        $user = rawurldecode($parsedUrl['user'] ?? '');
-        $pass = rawurldecode($parsedUrl['pass'] ?? '');
-        $dbname = ltrim($parsedUrl['path'] ?? '', '/');
-        
-        $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
-    } else {
-        
-        $dsn = "pgsql:host=localhost;port=5432;dbname=aurashop";
-        $user = "postgres";
-        $pass = "";
+    if (!$dbUrl) {
+        throw new PDOException("Database URL is not defined in the environment variables.");
     }
+    
+    $parsedUrl = parse_url($dbUrl);
+    $host = $parsedUrl['host'] ?? '';
+    $port = $parsedUrl['port'] ?? '5432';
+    $user = rawurldecode($parsedUrl['user'] ?? '');
+    $pass = rawurldecode($parsedUrl['pass'] ?? '');
+    $dbname = ltrim($parsedUrl['path'] ?? '', '/');
+    
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
 
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -81,8 +72,17 @@ try {
 
 function get_cart() {
     if (isset($_COOKIE['aura_cart'])) {
-        $cart = json_decode($_COOKIE['aura_cart'], true);
-        return is_array($cart) ? $cart : [];
+        $raw = $_COOKIE['aura_cart'];
+        $decoded = json_decode($raw, true);
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+        $decoded = json_decode(urldecode($raw), true);
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+        $decoded = json_decode(rawurldecode($raw), true);
+        return is_array($decoded) ? $decoded : [];
     }
     return [];
 }

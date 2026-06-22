@@ -46,7 +46,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Header -->
+    
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Frais de Livraison par Wilaya</h1>
@@ -58,7 +58,7 @@ require_once 'header.php';
         </a>
     </div>
 
-    <!-- Admin Sub-Navigation tabs -->
+    
     <div class="flex flex-wrap gap-2 mb-10 border-b border-outline-variant/10 pb-4">
         <a href="admin.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Tableau de bord</a>
         <a href="admin_orders.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Commandes</a>
@@ -82,7 +82,7 @@ require_once 'header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Form -->
+    
     <form method="POST" class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
         <input type="hidden" name="bulk_update" value="1">
         

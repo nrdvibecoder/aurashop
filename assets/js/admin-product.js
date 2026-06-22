@@ -1,5 +1,5 @@
 let colorIndex = window.colorIndex || 0;
-const colorBlocks = window.colorBlocks || {};  // { colorIndex: { files: [] } }
+const colorBlocks = window.colorBlocks || {};  
 
 function addColorBlock() {
     colorIndex++;
@@ -45,7 +45,7 @@ function addColorBlock() {
 
     container.appendChild(block);
 
-    // Sync hex color picker <-> text input
+    
     const picker = block.querySelector(`[name="color_hex_${idx}"]`);
     const hexText = block.querySelector(`[name="color_hex_text_${idx}"]`);
     picker.addEventListener('input', () => { hexText.value = picker.value; });
@@ -63,7 +63,6 @@ function removeColorBlock(btn) {
     block.remove();
 }
 
-// Helper function for compressing images
 function compressAndResizeImage(file, callback) {
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -92,7 +91,7 @@ function compressAndResizeImage(file, callback) {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, width, height);
 
-            // Compress to JPEG with 0.8 quality
+            
             const compressedBase64 = canvas.toDataURL('image/jpeg', 0.8);
             callback(compressedBase64);
         };
@@ -128,9 +127,9 @@ function removeColorThumbnail(btn, idx) {
     const thumb = btn.closest('[data-array-index]');
     const arrayIndex = parseInt(thumb.dataset.arrayIndex);
     if (colorBlocks[idx]) {
-        // Remove item from array and mark it as null or filter it out, or slice
+        
         colorBlocks[idx].files.splice(arrayIndex, 1);
-        // Re-index all remaining thumbnails in the DOM
+        
         const container = document.getElementById(`color-thumbnails-${idx}`);
         const thumbs = container.querySelectorAll('[data-array-index]');
         thumbs.forEach((t, index) => {
@@ -140,7 +139,6 @@ function removeColorThumbnail(btn, idx) {
     thumb.remove();
 }
 
-// Handle main image preview
 function handleMainImage(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -157,7 +155,6 @@ function handleMainImage(event) {
     });
 }
 
-// Serialize everything on form submit
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('product-form');
     if (!form) return;
@@ -167,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const colorImagesInput = document.getElementById('color-images-input');
         const sizesInput = document.getElementById('sizes-input');
 
-        // Collect colors
+        
         const colorBlockEls = document.querySelectorAll('.color-block');
         const colors = [];
         const colorImages = {};
@@ -188,19 +185,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (colorsInput) colorsInput.value = JSON.stringify(colors);
         if (colorImagesInput) colorImagesInput.value = JSON.stringify(colorImages);
 
-        // Collect checked sizes
+        
         const sizeCheckboxes = document.querySelectorAll('[name="size[]"]:checked');
         const sizes = Array.from(sizeCheckboxes).map(cb => cb.value);
         if (sizesInput) sizesInput.value = JSON.stringify(sizes);
     });
 
-    // Initialize with one color block if adding
+    
     const colorContainer = document.getElementById('color-blocks');
     if (colorContainer && colorContainer.children.length === 0) {
         addColorBlock();
     }
 
-    // Pre-fill existing color blocks for edit page
+    
     if (window.existingColors && window.existingColors.length > 0) {
         window.existingColors.forEach(c => {
             addColorBlock();

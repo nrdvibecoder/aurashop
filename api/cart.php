@@ -57,12 +57,12 @@ require_once 'header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Main Cart Layout -->
+    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start" id="cart-container">
         
-        <!-- ═══ Cart Items ═══ -->
+        
         <div class="lg:col-span-8 space-y-6" id="cart-items-list">
-            <!-- JS will render this -->
+            
             <div id="cart-loading" class="space-y-4">
                 <?php for ($i = 0; $i < 3; $i++): ?>
                 <div class="animate-pulse flex gap-4 bg-surface-container rounded-xl p-4">
@@ -76,12 +76,12 @@ require_once 'header.php';
             </div>
         </div>
 
-        <!-- ═══ Order Summary ═══ -->
+        
         <aside class="lg:col-span-4 lg:sticky lg:top-28">
             <div class="bg-surface-container-high rounded-2xl p-8 border border-outline-variant/10 space-y-8">
                 <h2 class="font-headline-md text-headline-md uppercase tracking-widest border-b border-outline-variant/20 pb-4">Résumé</h2>
                 
-                <!-- Promo Code -->
+                
                 <form method="POST" action="cart.php" class="flex gap-2">
                     <input type="text" name="promo_code" 
                            value="<?php echo sanitize($promoCode); ?>"
@@ -98,7 +98,7 @@ require_once 'header.php';
                 </div>
                 <?php endif; ?>
 
-                <!-- Summary lines -->
+                
                 <div class="space-y-3 font-body-md">
                     <div class="flex justify-between">
                         <span class="text-on-surface-variant">Sous-total</span>
@@ -148,7 +148,7 @@ function renderCart() {
     const listEl = document.getElementById('cart-items-list');
     const loadingEl = document.getElementById('cart-loading');
     
-    // Remove skeleton
+    
     if (loadingEl) loadingEl.remove();
 
     if (items.length === 0) {

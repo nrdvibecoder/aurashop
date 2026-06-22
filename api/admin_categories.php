@@ -66,7 +66,7 @@ require_once 'header.php';
 ?>
 
 <div class="min-h-screen py-24 px-margin-mobile max-w-container-max mx-auto">
-    <!-- Header -->
+    
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Gestion des Catégories</h1>
@@ -78,7 +78,7 @@ require_once 'header.php';
         </a>
     </div>
 
-    <!-- Admin Sub-Navigation tabs -->
+    
     <div class="flex flex-wrap gap-2 mb-10 border-b border-outline-variant/10 pb-4">
         <a href="admin.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Tableau de bord</a>
         <a href="admin_orders.php" class="px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container/50 font-label-sm text-label-sm uppercase tracking-wider">Commandes</a>
@@ -103,7 +103,7 @@ require_once 'header.php';
     <?php endif; ?>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Add Category Form -->
+        
         <div class="lg:col-span-1 bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm h-fit">
             <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary">add_circle</span>
@@ -125,7 +125,7 @@ require_once 'header.php';
             </form>
         </div>
 
-        <!-- Categories List (2 cols) -->
+        
         <div class="lg:col-span-2 bg-surface-container border border-outline-variant/10 rounded-xl p-8 shadow-sm">
             <h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary">list</span>
