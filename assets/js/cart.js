@@ -20,6 +20,11 @@ function addToCart(product_id, name, color, size, price, image_url, qty) {
     let cart = readCart();
     let existingIndex = cart.findIndex(item => item.product_id === product_id && item.color === color && item.size === size);
     
+    let finalImageUrl = image_url;
+    if (image_url && image_url.startsWith('data:')) {
+        finalImageUrl = '';
+    }
+    
     if (existingIndex > -1) {
         cart[existingIndex].quantity += parseInt(qty);
     } else {
@@ -29,7 +34,7 @@ function addToCart(product_id, name, color, size, price, image_url, qty) {
             color: color,
             size: size,
             price: parseInt(price),
-            image_url: image_url,
+            image_url: finalImageUrl,
             quantity: parseInt(qty)
         });
     }
